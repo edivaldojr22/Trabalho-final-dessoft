@@ -8,8 +8,8 @@ from os import path
 img_dir = path.join(path.dirname(__file__), 'img')
 
 # Dados gerais do jogo.
-WIDTH = 800 # Largura da tela
-HEIGHT = 550 # Altura da tela
+W, H = 800, 447
+win = pygame.display.set_mode((W,H))
 FPS = 60 # Frames por segundo
 
 # Define algumas variáveis com as cores básicas
@@ -19,6 +19,10 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
+
+def redrawWindow():
+    win.blit(background, (background_x, 0))  # draws our first bg image
+    pygame.display.update()  # updates the screen
 
 class Player(pygame.sprite.Sprite):
     
@@ -42,8 +46,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # Centraliza embaixo da tela.
-        self.rect.centerx = WIDTH / 2
-        self.rect.bottom = HEIGHT / 2
+        self.rect.centerx = W / 2
+        self.rect.bottom = H / 2
         
         # Velocidade da nave
         self.speedx = 0
@@ -56,7 +60,7 @@ pygame.init()
 pygame.mixer.init()
 
 # Tamanho da tela.
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen = pygame.display.set_mode((W, H))
 
 # Nome do jogo
 pygame.display.set_caption("Pokemon")
@@ -66,7 +70,8 @@ clock = pygame.time.Clock()
 
 # Carrega o fundo do jogo
 background = pygame.image.load(path.join(img_dir, 'teste_mapa_1.jpg')).convert()
-background_rect = background.get_rect()
+background_x = 0
+background_x2 = background.get_width()
 
 player = Player()
 
@@ -81,7 +86,12 @@ try:
     while running:
         
         # Ajusta a velocidade do jogo.
-        clock.tick(FPS)
+        clock.tick(FPS) 
+        background_x -= 1.4
+
+        if background_x < background.get_width() * -1:  # If our bg is at the -width then reset its position
+            background_x = background.get_width()
+
         
         # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
@@ -91,9 +101,7 @@ try:
                 running = False
     
         # A cada loop, redesenha o fundo e os sprites
-        screen.fill(BLACK)
-        screen.blit(background, background_rect)
-        all_sprites.draw(screen)
+        redrawWindow()
         
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
