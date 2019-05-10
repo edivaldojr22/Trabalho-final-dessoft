@@ -9,7 +9,6 @@ img_dir = path.join(path.dirname(__file__), 'img')
 
 # Dados gerais do jogo.
 W, H = 800, 447
-win = pygame.display.set_mode((W,H))
 FPS = 30 # Frames por segundo
 
 # Define algumas variáveis com as cores básicas
@@ -19,12 +18,12 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
-speed = 8
-
-def redrawWindow():
-    win.blit(background, (background_x, background_y))  # draws our first bg image
-    pygame.display.update()  # updates the screen
-
+SPEED = 8
+MOVING_NONE = 0
+MOVING_LEFT = 1
+MOVING_RIGHT = 2
+MOVING_UP = 3
+MOVING_DOWN = 4
 
 class Player(pygame.sprite.Sprite):
     
@@ -57,6 +56,7 @@ class Player(pygame.sprite.Sprite):
         # Melhora a colisão estabelecendo um raio de um circulo
         self.radius = 25
 
+
 # Inicialização do Pygame.
 pygame.init()
 pygame.mixer.init()
@@ -72,8 +72,11 @@ clock = pygame.time.Clock()
 
 # Carrega o fundo do jogo
 background = pygame.image.load(path.join(img_dir, 'teste_mapa_2.png')).convert()
+background_mask = pygame.image.load(path.join(img_dir, 'mascara_mapa_2.png')).convert()
 background_x = 0
 background_y = 0
+
+moving_state = MOVING_NONE
 
 player = Player()
 
@@ -90,30 +93,43 @@ try:
         # Ajusta a velocidade do jogo.
         clock.tick(FPS) 
 
-        if background_x < background.get_width() * -1: 
-            background_x = background.get_width()
-        if background_y < background.get_height() * -1: 
-            background_y = background.get_height()
-
-        
         # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
             
             # Verifica se foi fechado
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    background_x += speed
-                if event.key == pygame.K_RIGHT:
-                    background_x -= speed
-                if event.key == pygame.K_UP:
-                    background_y += speed
-                if event.key == pygame.K_DOWN:
-                    background_y -= speed
-    
+                    moving_state = MOVING_LEFT
+                elif event.key == pygame.K_RIGHT:
+                    moving_state = MOVING_RIGHT
+                elif event.key == pygame.K_UP:
+                    moving_state = MOVING_UP
+                elif event.key == pygame.K_DOWN:
+                    moving_state = MOVING_DOWN
+            elif event.type == pygame.KEYUP and event.key in [pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN]:
+                moving_state = MOVING_NONE
+
+        if moving_state == MOVING_UP:
+            background_y += SPEED
+            if background_mask.get_at((player.rect.left - background_x, player.rect.top - background_y)) == (0, 0, 0, 255):
+                background_y -= SPEED
+        elif moving_state == MOVING_DOWN:
+            background_y -= SPEED
+        elif moving_state == MOVING_LEFT:
+            background_x += SPEED
+        elif moving_state == MOVING_RIGHT:
+            background_x -= SPEED
+
+        if background_x < background.get_width() * -1: 
+            background_x = background.get_width()
+        if background_y < background.get_height() * -1: 
+            background_y = background.get_height()
+
+        
         # A cada loop, redesenha o fundo e os sprites
-        redrawWindow()
+        screen.blit(background, (background_x, background_y))  # draws our first bg image
         all_sprites.draw(screen)
         
         # Depois de desenhar tudo, inverte o display.
