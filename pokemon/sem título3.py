@@ -34,11 +34,11 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
 
-        player_img = pygame.image.load(path.join(img_dir, "personagem_costas.png"))
+        player_img = pygame.image.load(path.join(img_dir, "andar_direita.png"))
         self.image = player_img
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (80, 80))
+        self.image = pygame.transform.scale(player_img, (60, 60))
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -71,10 +71,10 @@ pygame.display.set_caption("Pokemon")
 clock = pygame.time.Clock()
 
 # Carrega o fundo do jogo
-background = pygame.image.load(path.join(img_dir, 'teste_mapa_2.png')).convert()
-background_mask = pygame.image.load(path.join(img_dir, 'mascara_mapa_2.png')).convert()
-background_x = 0
-background_y = 0
+background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
+background_mask = pygame.image.load(path.join(img_dir, 'mascara_mapa.png')).convert()
+background_x = -100
+background_y = -200
 
 moving_state = MOVING_NONE
 
@@ -117,10 +117,17 @@ try:
                 background_y -= SPEED
         elif moving_state == MOVING_DOWN:
             background_y -= SPEED
+            if background_mask.get_at((player.rect.left - background_x, player.rect.top - background_y)) == (0, 0, 0, 255):
+                background_y += SPEED
         elif moving_state == MOVING_LEFT:
             background_x += SPEED
+            if background_mask.get_at((player.rect.left - background_x, player.rect.top - background_y)) == (0, 0, 0, 255):
+                background_x -= SPEED
         elif moving_state == MOVING_RIGHT:
             background_x -= SPEED
+            if background_mask.get_at((player.rect.left - background_x, player.rect.top - background_y)) == (0, 0, 0, 255):
+                background_x += SPEED
+            
 
         if background_x < background.get_width() * -1: 
             background_x = background.get_width()
