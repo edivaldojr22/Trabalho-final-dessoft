@@ -104,13 +104,13 @@ try:
                 running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    background_x -= speed
-                if event.key == pygame.K_RIGHT:
                     background_x += speed
+                if event.key == pygame.K_RIGHT:
+                    background_x -= speed
                 if event.key == pygame.K_UP:
-                    background_y -= speed
-                if event.key == pygame.K_DOWN:
                     background_y += speed
+                if event.key == pygame.K_DOWN:
+                    background_y -= speed
     
         # A cada loop, redesenha o fundo e os sprites
         redrawWindow()
