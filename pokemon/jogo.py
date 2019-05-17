@@ -5,6 +5,11 @@ import pygame
 from os import path
 import random
 
+INIT = 0
+GAME = 1
+QUIT = 2
+
+
 # Estabelece a pasta que contem as figuras.
 img_dir = path.join(path.dirname(__file__), 'img')
 
@@ -71,30 +76,32 @@ screen = pygame.display.set_mode((W, H))
 # Nome do jogo
 pygame.display.set_caption("Pokemon")
 
-# Variável para o ajuste de velocidade
-clock = pygame.time.Clock()
 
-# Carrega o fundo do jogo
-background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
-background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_mapa.png')).convert()
-background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
-background_x = -700
-background_y = -600
-background_x_prev = background_x
-background_y_prev = background_y
-
-background_mask = pygame.mask.from_threshold(background_mask_img, (0, 0, 0), (20,20,20,255))
-
-moving_state = MOVING_NONE
-
-player = Player()
-
-all_sprites = pygame.sprite.Group()
-all_sprites.add(player)
 
 # Comando para evitar travamentos.
-try:
+def jogo_principal(screen):
     
+# Variável para o ajuste de velocidade
+    clock = pygame.time.Clock()
+    
+    # Carrega o fundo do jogo
+    background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
+    background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_mapa.png')).convert()
+    background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
+    background_x = -700
+    background_y = -600
+    background_x_prev = background_x
+    background_y_prev = background_y
+    
+    background_mask = pygame.mask.from_threshold(background_mask_img, (0, 0, 0), (20,20,20,255))
+    
+    moving_state = MOVING_NONE
+    
+    player = Player()
+    
+    all_sprites = pygame.sprite.Group()
+    all_sprites.add(player)
+
     # Loop principal.
     running = True
     while running:
@@ -148,5 +155,14 @@ try:
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
         
+    return QUIT
+
+try:
+    state = INIT
+    while state != QUIT:
+        if state == INIT:
+            state = jogo_principal(screen)
+        else:
+            state = QUIT
 finally:
     pygame.quit()
