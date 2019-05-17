@@ -122,6 +122,7 @@ def jogo_principal(screen):
                     moving_state = MOVING_RIGHT
                 elif event.key == pygame.K_UP:
                     moving_state = MOVING_UP
+                    player_img = pygame.image.load(path.join(img_dir, "personagem_costas.png"))
                 elif event.key == pygame.K_DOWN:
                     moving_state = MOVING_DOWN
             elif event.type == pygame.KEYUP and event.key in [pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN]:
@@ -162,6 +163,7 @@ try:
     while state != QUIT:
         if state == INIT:
             state = jogo_principal(screen)
+            
         else:
             state = QUIT
 finally:
