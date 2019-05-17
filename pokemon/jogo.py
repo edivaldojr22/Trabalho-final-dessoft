@@ -69,7 +69,7 @@ pygame.mixer.init()
 screen = pygame.display.set_mode((W, H))
 
 # Nome do jogo
-pygame.display.set_caption("Pokemon")
+pygame.display.set_caption("Pokpython")
 
 # Variável para o ajuste de velocidade
 clock = pygame.time.Clock()
@@ -131,6 +131,14 @@ try:
             background_x += SPEED
         elif moving_state == MOVING_RIGHT:
             background_x -= SPEED
+<<<<<<< HEAD
+=======
+            if background_mask.get_at((player.rect.left - background_x, player.rect.top - background_y)) == (0, 0, 0, 255):
+                background_x += SPEED
+                
+                
+
+>>>>>>> 9894973e139f68560aed54dd789ba10e88d4b872
 
         if background_x < background.get_width() * -1: 
             background_x = background.get_width()
@@ -150,3 +158,6 @@ try:
         
 finally:
     pygame.quit()
+    
+    
+
