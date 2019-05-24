@@ -1,12 +1,14 @@
 import pygame
 from os import path
-import random
+
 
 img_dir = path.join(path.dirname(__file__), 'img')
 
 # Dados gerais do jogo.
 W, H = 800, 447
 FPS = 30 # Frames por segundo
+
+QUIT = 2
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
@@ -25,52 +27,34 @@ class Blastoise(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         blastoise_img = pygame.image.load(path.join(img_dir, "9.png"))
-        self.image = blastoise_img_img
-        self.image.set_colorkey(WHITE)
-        
-        # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (90, 80))
-        
-        
-
-        # Deixando transparente.
+        self.image = blastoise_img
         self.image.set_colorkey(WHITE)
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
         
         # Centraliza embaixo da tela.
-        self.rect.centerx = W - 10
-        self.rect.bottom = H - 15
+        self.rect.centerx = W // 2
+        self.rect.bottom = H // 2     
         
-        
-        
-        
-        
-
-
-
-# Tamanho da tela.
-screen = pygame.display.set_mode((W, H))
-
-
+        self.hp = 100
 
 def combate(screen):
+    # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
-    
+        
     # Carrega o fundo do jogo
     background = pygame.image.load(path.join(img_dir, 'luta.jpg')).convert()
-    background_x = -700
-    background_y = -600
-   
-    
-    
-    blastoise = Blastoise()
-    
+    background_x = 0
+    background_y = 0
+
+    blastoise = Blastoise()    
     all_sprites = pygame.sprite.Group()
     all_sprites.add(blastoise)
-    
-    
+
+    inicio = pygame.time.get_ticks()
+
+    # Loop principal.
     running = True
     while running:
         
@@ -80,14 +64,47 @@ def combate(screen):
         # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
             
-            
-            
-            
+            # Verifica se foi fechado
+            if event.type == pygame.QUIT:
+                running = False
 
-
-
-     
+        # A cada loop, redesenha o fundo e os sprites
+        screen.blit(background, (background_x, background_y))  # draws our first bg image
+        all_sprites.draw(screen)
+        
+        # Desenha o power bar do blastoise.
+        bar = pygame.Surface((blastoise.hp, 5))
+        bar_rect = bar.get_rect()
+        bar.fill(RED)
+        screen.blit(bar, (100, 77))
+        
+        agora = pygame.time.get_ticks()
+        if (agora - inicio) > 500:
+            inicio = agora
+            blastoise.hp -= 10
+            if blastoise.hp <= 0:
+                running = False
+        
+        # Depois de desenhar tudo, inverte o display.
+        pygame.display.flip()
+        
     return QUIT
 
+
+if __name__ == "__main__":
     
+    # Inicialização do Pygame.
+    pygame.init()
+    pygame.mixer.init()
+    
+    # Tamanho da tela.
+    screen = pygame.display.set_mode((W, H))
+    
+    # Nome do jogo
+    pygame.display.set_caption("Pokemon")
+    
+    try:
+        combate(screen)    
+    finally:
+        pygame.quit()
     
