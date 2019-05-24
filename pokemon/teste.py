@@ -10,7 +10,7 @@ img_dir = path.join(path.dirname(__file__), 'img')
 
 # Dados gerais do jogo.
 W, H = 800, 447
-FPS = 30 # Frames por segundo
+FPS = 60 # Frames por segundo
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
@@ -35,31 +35,37 @@ class Player(pygame.sprite.Sprite):
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
-        player_img = pygame.image.load(path.join(img_dir, "andar_direita.png"))
-        self.image = player_img
-        self.image.set_colorkey(WHITE)
-        
-        # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (31, 40))
-        
-        self.mask = pygame.mask.from_threshold(self.image, (0, 0, 0, 255), (255,255,255,10))
+        self.images = {
+            MOVING_LEFT: pygame.image.load(path.join(img_dir, "andar_esquerda_1.png")),
+            MOVING_RIGHT: pygame.image.load(path.join(img_dir, "andar_direita_1.png")),
+            MOVING_UP: pygame.image.load(path.join(img_dir, "andar_cima_1.png")),
+            MOVING_DOWN: pygame.image.load(path.join(img_dir, "andar_baixo_1.png")),
+            MOVING_NONE: pygame.image.load(path.join(img_dir, "andar_direita_1.png"))
+        }
 
-        # Deixando transparente.
-        self.image.set_colorkey(WHITE)
-        
-        # Detalhes sobre o posicionamento.
-        self.rect = self.image.get_rect()
-        
-        # Centraliza embaixo da tela.
-        self.rect.centerx = W / 2
-        self.rect.bottom = H / 2
-        
-        # Velocidade da nave
-        self.speedx = 0
-        
-        # Melhora a colisão estabelecendo um raio de um circulo
-        self.radius = 25
+        for k in self.images:
+            self.images[k] = pygame.transform.scale(self.images[k], (31, 40))
 
+        self.state = MOVING_NONE
+        self.change_state(MOVING_RIGHT)
+
+    def change_state(self, state):
+        if state != self.state:
+            self.state = state
+
+            self.image = self.images[self.state]
+            self.images[MOVING_NONE] = self.image
+            self.image.set_colorkey(WHITE)
+
+            self.mask = pygame.mask.from_threshold(self.image, (0, 0, 0, 255), (255,255,255,10))
+
+            # Detalhes sobre o posicionamento.
+            self.rect = self.image.get_rect()
+            
+            # Centraliza embaixo da tela.
+            self.rect.centerx = W / 2
+            self.rect.bottom = H / 2
+                   
 
 # Inicialização do Pygame.
 pygame.init()
@@ -69,7 +75,7 @@ pygame.mixer.init()
 screen = pygame.display.set_mode((W, H))
 
 # Nome do jogo
-pygame.display.set_caption("Pokemon")
+pygame.display.set_caption("Pokphyton")
 
 # Variável para o ajuste de velocidade
 clock = pygame.time.Clock()
@@ -84,6 +90,7 @@ background_x_prev = background_x
 background_y_prev = background_y
 
 background_mask = pygame.mask.from_threshold(background_mask_img, (0, 0, 0), (20,20,20,255))
+matinho = pygame.mask.from_threshold(background_mask_mato, (0, 0, 0), (20,20,20,255))
 
 moving_state = MOVING_NONE
 
@@ -110,7 +117,8 @@ try:
                 running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    moving_state = MOVING_LEFT
+                    
+                    moving_state = MOVING_LEFT          
                 elif event.key == pygame.K_RIGHT:
                     moving_state = MOVING_RIGHT
                 elif event.key == pygame.K_UP:
@@ -119,6 +127,8 @@ try:
                     moving_state = MOVING_DOWN
             elif event.type == pygame.KEYUP and event.key in [pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN]:
                 moving_state = MOVING_NONE
+
+        player.change_state(moving_state)
 
         background_x_prev = background_x
         background_y_prev = background_y
@@ -140,6 +150,9 @@ try:
         if background_mask.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
             background_x = background_x_prev
             background_y = background_y_prev
+
+        if matinho.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
+            print("hhhhhh")
 
         # A cada loop, redesenha o fundo e os sprites
         screen.blit(background, (background_x, background_y))  # draws our first bg image

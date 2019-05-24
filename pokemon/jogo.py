@@ -94,6 +94,7 @@ def jogo_principal(screen):
     background_y_prev = background_y
     
     background_mask = pygame.mask.from_threshold(background_mask_img, (0, 0, 0), (20,20,20,255))
+    matinho = pygame.mask.from_threshold(background_mask_mato, (0, 0, 0), (34,177,76,0))
     
     moving_state = MOVING_NONE
     
@@ -126,6 +127,7 @@ def jogo_principal(screen):
                     moving_state = MOVING_DOWN
             elif event.type == pygame.KEYUP and event.key in [pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN]:
                 moving_state = MOVING_NONE
+            
 
         background_x_prev = background_x
         background_y_prev = background_y
@@ -148,6 +150,11 @@ def jogo_principal(screen):
             background_x = background_x_prev
             background_y = background_y_prev
 
+        if matinho.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
+            print(hhhhhh)
+            #random
+                #state = BATTLE
+
         # A cada loop, redesenha o fundo e os sprites
         screen.blit(background, (background_x, background_y))  # draws our first bg image
         all_sprites.draw(screen)
@@ -162,6 +169,9 @@ try:
     while state != QUIT:
         if state == INIT:
             state = jogo_principal(screen)
+        elif state == BATTLE:
+            #state = combate(screen)
+            print(14)
         else:
             state = QUIT
 finally:
