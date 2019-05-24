@@ -84,27 +84,28 @@ def combate(screen):
             blastoise.hp -= 10
             if blastoise.hp <= 0:
                 running = False
+
         
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
         
-    return QUIT
+    return 42
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     
     # Inicialização do Pygame.
-    pygame.init()
-    pygame.mixer.init()
+    #pygame.init()
+    #pygame.mixer.init()
     
     # Tamanho da tela.
-    screen = pygame.display.set_mode((W, H))
+    #screen = pygame.display.set_mode((W, H))
     
     # Nome do jogo
-    pygame.display.set_caption("Pokemon")
+    #pygame.display.set_caption("Pokemon")
     
-    try:
-        combate(screen)    
-    finally:
-        pygame.quit()
+    #try:
+        #combate(screen)    
+    #finally:
+        #pygame.quit()
     

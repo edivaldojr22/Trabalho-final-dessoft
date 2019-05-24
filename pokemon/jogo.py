@@ -4,6 +4,7 @@
 import pygame
 from os import path
 import random
+from combate import combate
 
 # Estabelece a pasta que contem as figuras.
 img_dir = path.join(path.dirname(__file__), 'img')
