@@ -41,6 +41,7 @@ class Blastoise(pygame.sprite.Sprite):
         self.hp = 155
 
 def combate(screen):
+    #font = pygame.font.Font(path.join(fnt_dir, "PressStart2P.ttf"), 28)
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
         
@@ -91,7 +92,6 @@ def combate(screen):
         
         # Desenha o power bar do blastoise.
         bar = pygame.Surface((blastoise.hp, 9))
-        bar_rect = bar.get_rect()
         bar.fill(GREEN)
         screen.blit(bar, (157, 88))
         
@@ -101,6 +101,9 @@ def combate(screen):
             #blastoise.hp -= 10
             #if blastoise.hp <= 0:
              #   running = False
+        
+        #text_img = font.render("Oi", True, BLUE)
+        
         
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
