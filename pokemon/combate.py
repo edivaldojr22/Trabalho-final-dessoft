@@ -2,7 +2,13 @@ import pygame
 from os import path
 import random
 
+
+music_dir = path.join(path.dirname(__file__), 'music')
+pygame.mixer.pre_init(44100, -16, 2, 2048)
+pygame.init()
 img_dir = path.join(path.dirname(__file__), 'img')
+
+
 
 # Dados gerais do jogo.
 W, H = 800, 447
@@ -18,6 +24,7 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 
+
 class Blastoise(pygame.sprite.Sprite):
     
     # Construtor da classe.
@@ -28,7 +35,7 @@ class Blastoise(pygame.sprite.Sprite):
         
         blastoise_img = pygame.image.load(path.join(img_dir, "9.png"))
         self.image = blastoise_img
-        self.image.set_colorkey(WHITE)
+        self.image.set_colorkey(BLACK)
         self.image = pygame.transform.scale(self.image,(120,140))
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
@@ -59,8 +66,13 @@ def combate(screen):
 
     # Loop principal.
     running = True
+    MUSICA = True
     while running:
-        
+        if MUSICA:
+            pygame.mixer.music.set_volume(0.2)
+            pygame.mixer.music.load(path.join(music_dir, "musica_luta.mp3"))
+            pygame.mixer.music.play()
+            MUSICA = False
         # Ajusta a velocidade do jogo.
         clock.tick(FPS) 
 
@@ -79,7 +91,7 @@ def combate(screen):
                         print('ataque crítico')
                         blastoise.hp -= 50
                     elif ataque >=5:
-                        blastoise.hp -=20
+                        blastoise.hp -= 20
                     else :
                         print('Errrrou')
                         
@@ -95,6 +107,10 @@ def combate(screen):
         if blastoise.hp < 0:
             hp = 0
             running = False
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
+            pygame.mixer.music.play()
+
         bar = pygame.Surface((hp, 9))
         bar.fill(GREEN)
         screen.blit(bar, (157, 88))
