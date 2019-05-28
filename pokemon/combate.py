@@ -2,11 +2,12 @@ import pygame
 from os import path
 import random
 
+
 img_dir = path.join(path.dirname(__file__), 'img')
 
 # Dados gerais do jogo.
 W, H = 800, 447
-FPS = 30 # Frames por segundo
+FPS = 60 # Frames por segundo
 
 QUIT = 2
 
@@ -38,7 +39,7 @@ class Blastoise(pygame.sprite.Sprite):
         self.rect.bottom =  220
         
         
-        self.hp = 155
+        self.hp = 154
         
 
 class pokemon_do_player(pygame.sprite.Sprite):
@@ -57,9 +58,9 @@ class pokemon_do_player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # Centraliza embaixo da tela.
-        self.rect.centerx = 598
-        self.rect.bottom =  220
-        self.hp = 155
+        self.rect.centerx = 206
+        self.rect.bottom =  350
+        self.hp = 152
 
 
 def combate(screen):
@@ -77,18 +78,19 @@ def combate(screen):
     all_sprites = pygame.sprite.Group()
     all_sprites.add(blastoise)
     rayquaza = pokemon_do_player() 
-    all_sprites = pygame.sprite.Group()
     all_sprites.add(rayquaza)
 
     #inicio = pygame.time.get_ticks()
 
     # Loop principal.
     running = True
+    turno = True
+    time =0
+    
     while running:
         
         # Ajusta a velocidade do jogo.
         clock.tick(FPS) 
-
         # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
             
@@ -98,38 +100,47 @@ def combate(screen):
             if pygame.mouse.get_pressed()[0]:
                 x = pygame.mouse.get_pos()[0]
                 y =  pygame.mouse.get_pos()[1]
-                
-                
-                if x > 404 and x < 576 and  y > 352 and y < 385  :
-                    ataque = random.randint(0,100)
-                    if ataque >= 90:
-                        print('ataque crítico')
-                        blastoise.hp -= 50
-                    elif ataque >= 5:
-                        blastoise.hp -=20
-                    else :
-                        print('Errrrou')
-                elif x > 606 and x < 780 and  y > 352 and y < 385:
-                    defesa = random.randint(0,100)
-                    print(defesa)
-                elif x > 606 and x < 780 and y > 404 and y < 436:
-                    fuga = random.randint(0,100)
-                    if fuga > 5:
-                        print('fuga bem sucedida!')
-                        running = False
-                    else:
-                        print('se ferrou arregão!')
+                if turno:
+                    if x > 404 and x < 576 and  y > 352 and y < 385  :
+                        ataque = random.randint(0,100)
+                        if ataque >= 90:
+                            print('ataque crítico')
+                            blastoise.hp -= 50
+                        elif ataque >= 5:
+                            blastoise.hp -=20
+                        else :
+                            print('Errrrou')
+                        turno= False
+                        time = pygame.time.get_ticks()
+                    elif x > 606 and x < 780 and  y > 352 and y < 385:
+                        defesa = random.randint(0,100)
+                        print(defesa) 
+                        turno = False
+                    elif x > 606 and x < 780 and y > 404 and y < 436:
+                        fuga = random.randint(0,100)
+                        if fuga > 5:
+                            print('fuga bem sucedida!')
+                            running = False
+                        else:
+                            print('se ferrou arregão!')
                         
-            print('Vez do adversário!')
-            
-            ataque_do_adversario = random.randint(0,100)
-            if ataque_do_adversario >= 90:
-                print('ataque crítico')
-                rayquaza.hp -= 50
-            elif ataque_do_adversario >=5:
-                rayquaza.hp -=20
-            else :
-                print('Errrrou')
+           
+
+        if not turno:
+             now = pygame.time.get_ticks()
+             diff= now - time
+             if diff>3000:
+                print('Vez do adversário!')
+                ataque_do_adversario = random.randint(0,100)
+                if ataque_do_adversario >= 90:
+                    print('ataque crítico')
+                    rayquaza.hp -= 50
+                elif ataque_do_adversario >=5:
+                    rayquaza.hp -=20
+                    print('acertou')
+                else :
+                    print('Errrrou')
+                turno = True
                     
 
         # A cada loop, redesenha o fundo e os sprites
@@ -145,10 +156,13 @@ def combate(screen):
         bar.fill(GREEN)
         screen.blit(bar, (157, 88))
         
-        print(rayquaza.hp)
-        barra = pygame.Surface((rayquaza.hp, 9))
+        hp2 = rayquaza.hp
+        if rayquaza.hp <0:
+            hp2 = 0
+            running = False
+        barra = pygame.Surface((hp2, 9))
         barra.fill(GREEN)
-        screen.blit(barra, (300, 160))
+        screen.blit(barra, (630, 272))
         
         
         
@@ -167,7 +181,7 @@ def combate(screen):
 
 #if __name__ == "__main__":
     
-    # Inicialização do Pygame.
+     #Inicialização do Pygame.
     #pygame.init()
     #pygame.mixer.init()
     
@@ -178,7 +192,7 @@ def combate(screen):
     #pygame.display.set_caption("Pokemon")
     
     #try:
-        #combate(screen)    
+     #   combate(screen)    
     #finally:
-        #pygame.quit()
+     #   pygame.quit()
     
