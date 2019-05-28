@@ -19,7 +19,7 @@ pygame.mixer.music.play()
 
 # Dados gerais do jogo.
 W, H = 800, 447
-FPS = 30 # Frames por segundo
+FPS = 60 # Frames por segundo
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
@@ -152,7 +152,7 @@ def jogo(screen):
 
         if matinho.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)) and moving_state != MOVING_NONE:
             chance = random.randint(0, 100)
-            if chance < 5:
+            if chance < 2:
                 pygame.mixer.music.stop()
                 combate(screen)
                 moving_state = MOVING_NONE 
