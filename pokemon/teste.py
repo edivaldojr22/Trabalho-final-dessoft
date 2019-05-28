@@ -144,7 +144,7 @@ def jogo(screen):
 
         if matinho.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)) and moving_state != MOVING_NONE:
             chance = random.randint(0, 100)
-            if chance < 5:
+            if chance < 2:
                 combate(screen)
                 moving_state = MOVING_NONE 
 
