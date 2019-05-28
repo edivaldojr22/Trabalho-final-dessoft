@@ -137,7 +137,11 @@ def combate(screen):
         all_sprites.draw(screen)
         
         # Desenha o power bar do blastoise.
-        bar = pygame.Surface((blastoise.hp, 9))
+        hp= blastoise.hp
+        if blastoise.hp < 0:
+            hp = 0
+            running = False
+        bar = pygame.Surface((hp, 9))
         bar.fill(GREEN)
         screen.blit(bar, (157, 88))
         
@@ -158,23 +162,23 @@ def combate(screen):
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
         
-    return QUIT
+    return 42
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     
     # Inicialização do Pygame.
-    pygame.init()
-    pygame.mixer.init()
+    #pygame.init()
+    #pygame.mixer.init()
     
     # Tamanho da tela.
-    screen = pygame.display.set_mode((W, H))
+    #screen = pygame.display.set_mode((W, H))
     
     # Nome do jogo
-    pygame.display.set_caption("Pokemon")
+    #pygame.display.set_caption("Pokemon")
     
-    try:
-        combate(screen)    
-    finally:
-        pygame.quit()
+    #try:
+        #combate(screen)    
+    #finally:
+        #pygame.quit()
     

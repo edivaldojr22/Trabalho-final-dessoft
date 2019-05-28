@@ -4,13 +4,14 @@
 import pygame
 from os import path
 import random
+from combate import combate
 
 # Estabelece a pasta que contem as figuras.
 img_dir = path.join(path.dirname(__file__), 'img')
 
 # Dados gerais do jogo.
 W, H = 800, 447
-FPS = 60 # Frames por segundo
+FPS = 300 # Frames por segundo
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
@@ -25,7 +26,9 @@ MOVING_LEFT = 1
 MOVING_RIGHT = 2
 MOVING_UP = 3
 MOVING_DOWN = 4
-BATTLE = 5
+INIT = 42
+QUIT = 1337
+COMBATE = 5
 
 class Player(pygame.sprite.Sprite):
     
@@ -67,40 +70,28 @@ class Player(pygame.sprite.Sprite):
             self.rect.bottom = H / 2
                    
 
-# Inicialização do Pygame.
-pygame.init()
-pygame.mixer.init()
-
-# Tamanho da tela.
-screen = pygame.display.set_mode((W, H))
-
-# Nome do jogo
-pygame.display.set_caption("Pokphyton")
-
 # Variável para o ajuste de velocidade
-clock = pygame.time.Clock()
+def jogo(screen):
+    clock = pygame.time.Clock()
 
-# Carrega o fundo do jogo
-background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
-background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_mapa.png')).convert()
-background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
-background_x = -700
-background_y = -600
-background_x_prev = background_x
-background_y_prev = background_y
+    # Carrega o fundo do jogo
+    background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
+    background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_final.png')).convert()
+    background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
+    background_x = -700
+    background_y = -600
+    background_x_prev = background_x
+    background_y_prev = background_y
 
-background_mask = pygame.mask.from_threshold(background_mask_img, (0, 0, 0), (20,20,20,255))
-matinho = pygame.mask.from_threshold(background_mask_mato, (0, 0, 0), (20,20,20,255))
+    background_mask = pygame.mask.from_threshold(background_mask_img, (0, 0, 0), (20,20,20,255))
+    matinho = pygame.mask.from_threshold(background_mask_mato, (0, 0, 0), (20,20,20,255))
 
-moving_state = MOVING_NONE
+    moving_state = MOVING_NONE
 
-player = Player()
+    player = Player()
 
-all_sprites = pygame.sprite.Group()
-all_sprites.add(player)
-
-# Comando para evitar travamentos.
-try:
+    all_sprites = pygame.sprite.Group()
+    all_sprites.add(player)
     
     # Loop principal.
     running = True
@@ -151,8 +142,11 @@ try:
             background_x = background_x_prev
             background_y = background_y_prev
 
-        if matinho.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
-            print("hhhhhh")
+        if matinho.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)) and moving_state != MOVING_NONE:
+            chance = random.randint(0, 100)
+            if chance < 5:
+                combate(screen)
+                moving_state = MOVING_NONE 
 
         # A cada loop, redesenha o fundo e os sprites
         screen.blit(background, (background_x, background_y))  # draws our first bg image
@@ -160,6 +154,30 @@ try:
         
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
+    
+    return(QUIT)
         
+
+# Inicialização do Pygame.
+pygame.init()
+pygame.mixer.init()
+
+# Tamanho da tela.
+screen = pygame.display.set_mode((W, H))
+
+# Nome do jogo
+pygame.display.set_caption("Pokphyton")
+
+# Comando para evitar travamentos.
+try:
+    state = INIT
+    while state != QUIT:
+        if state == INIT:
+            state = jogo(screen)
+        elif state == COMBATE:
+            state = combate(screen)
+            print(state)
+        else:
+            state = QUIT
 finally:
     pygame.quit()
