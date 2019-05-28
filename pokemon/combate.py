@@ -46,7 +46,7 @@ def combate(screen):
     clock = pygame.time.Clock()
         
     # Carrega o fundo do jogo
-    background = pygame.image.load(path.join(img_dir, 'luta.jpg')).convert()
+    background = pygame.image.load(path.join(img_dir, 'luta_basica.jpg')).convert()
     background = pygame.transform.scale(background,(W,H))
     background_x = 0
     background_y = 0
