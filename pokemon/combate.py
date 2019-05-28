@@ -38,8 +38,8 @@ class Blastoise(pygame.sprite.Sprite):
         self.rect.centerx = 598
         self.rect.bottom =  220
         
-        
-        self.hp = 154
+        self.maxhp = 394
+        self.hp = self.maxhp
         
 
 class pokemon_do_player(pygame.sprite.Sprite):
@@ -60,7 +60,10 @@ class pokemon_do_player(pygame.sprite.Sprite):
         # Centraliza embaixo da tela.
         self.rect.centerx = 206
         self.rect.bottom =  350
-        self.hp = 152
+        
+        self.maxhp = 461
+        self.hp = self.maxhp
+        
 
 
 def combate(screen):
@@ -101,6 +104,9 @@ def combate(screen):
                 x = pygame.mouse.get_pos()[0]
                 y =  pygame.mouse.get_pos()[1]
                 if turno:
+                    time = pygame.time.get_ticks()
+                    defesa = 0
+                    
                     if x > 404 and x < 576 and  y > 352 and y < 385  :
                         ataque = random.randint(0,100)
                         if ataque >= 90:
@@ -111,7 +117,6 @@ def combate(screen):
                         else :
                             print('Errrrou')
                         turno= False
-                        time = pygame.time.get_ticks()
                     elif x > 606 and x < 780 and  y > 352 and y < 385:
                         defesa = random.randint(0,100)
                         print(defesa) 
@@ -123,20 +128,27 @@ def combate(screen):
                             running = False
                         else:
                             print('se ferrou arregão!')
+                            turno = False
                         
            
 
         if not turno:
              now = pygame.time.get_ticks()
              diff= now - time
-             if diff>3000:
+             if diff> 1000:
                 print('Vez do adversário!')
                 ataque_do_adversario = random.randint(0,100)
                 if ataque_do_adversario >= 90:
                     print('ataque crítico')
-                    rayquaza.hp -= 50
+                    dano = 50 - defesa
+                    if dano < 0:
+                        dano = 0
+                    rayquaza.hp -= dano
                 elif ataque_do_adversario >=5:
-                    rayquaza.hp -=20
+                    dano = 20 - defesa
+                    if dano < 0:
+                        dano = 0
+                    rayquaza.hp -= dano
                     print('acertou')
                 else :
                     print('Errrrou')
@@ -149,18 +161,20 @@ def combate(screen):
         
         # Desenha o power bar do blastoise.
         hp= blastoise.hp
+        maxhp = blastoise.maxhp
         if blastoise.hp < 0:
             hp = 0
             running = False
-        bar = pygame.Surface((hp, 9))
+        bar = pygame.Surface((154*hp/maxhp, 9))
         bar.fill(GREEN)
         screen.blit(bar, (157, 88))
         
         hp2 = rayquaza.hp
+        maxhp2 = rayquaza.maxhp
         if rayquaza.hp <0:
             hp2 = 0
             running = False
-        barra = pygame.Surface((hp2, 9))
+        barra = pygame.Surface((152*hp2/maxhp2, 9))
         barra.fill(GREEN)
         screen.blit(barra, (630, 272))
         
