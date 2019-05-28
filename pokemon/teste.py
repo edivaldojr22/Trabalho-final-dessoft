@@ -82,7 +82,7 @@ clock = pygame.time.Clock()
 
 # Carrega o fundo do jogo
 background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
-background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_mapa.png')).convert()
+background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_final.png')).convert()
 background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
 background_x = -700
 background_y = -600
