@@ -91,7 +91,11 @@ def combate(screen):
         all_sprites.draw(screen)
         
         # Desenha o power bar do blastoise.
-        bar = pygame.Surface((blastoise.hp, 9))
+        hp= blastoise.hp
+        if blastoise.hp < 0:
+            hp = 0
+            running = False
+        bar = pygame.Surface((hp, 9))
         bar.fill(GREEN)
         screen.blit(bar, (157, 88))
         

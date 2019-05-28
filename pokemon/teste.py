@@ -11,7 +11,7 @@ img_dir = path.join(path.dirname(__file__), 'img')
 
 # Dados gerais do jogo.
 W, H = 800, 447
-FPS = 30 # Frames por segundo
+FPS = 300 # Frames por segundo
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
@@ -76,7 +76,7 @@ def jogo(screen):
 
     # Carrega o fundo do jogo
     background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
-    background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_mapa.png')).convert()
+    background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_final.png')).convert()
     background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
     background_x = -700
     background_y = -600
@@ -145,9 +145,8 @@ def jogo(screen):
         if matinho.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)) and moving_state != MOVING_NONE:
             chance = random.randint(0, 100)
             if chance < 5:
-                state = combate(screen)
-                moving_state = MOVING_NONE
-                print(moving_state)
+                combate(screen)
+                moving_state = MOVING_NONE 
 
         # A cada loop, redesenha o fundo e os sprites
         screen.blit(background, (background_x, background_y))  # draws our first bg image
