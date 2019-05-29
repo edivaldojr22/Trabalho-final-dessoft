@@ -136,7 +136,11 @@ def combate(screen):
                         fuga = random.randint(0,100)
                         if fuga > 5:
                             print('fuga bem sucedida!')
+                            pygame.mixer.music.stop()
+                            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
+                            pygame.mixer.music.play()
                             running = False
+                            
                         else:
                             print('se ferrou arregão!')
                             turno = False
@@ -189,6 +193,9 @@ def combate(screen):
         if rayquaza.hp <0:
             hp2 = 0
             running = False
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
+            pygame.mixer.music.play()
         barra = pygame.Surface((152*hp2/maxhp2, 9))
         barra.fill(GREEN)
         screen.blit(barra, (630, 272))
@@ -197,6 +204,9 @@ def combate(screen):
         
 
         if blastoise.hp <= 0 or rayquaza.hp <= 0:
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
+            pygame.mixer.music.play()
             running = False
         
         #text_img = font.render("Oi", True, BLUE)
