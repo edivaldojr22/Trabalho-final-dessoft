@@ -242,7 +242,6 @@ def combate(screen):
             pygame.mixer.music.stop()
             pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
             pygame.mixer.music.play()
->>>>>>> 4d08af28f026b6628bf8e477af70eed9de5b36f4
             running = False
         
         escreve(fonte_pequena,'Blastoise',(  0,H - 367), screen, BLACK)
