@@ -50,27 +50,6 @@ class Blastoise(pygame.sprite.Sprite):
         self.maxhp = 394
         self.hp = self.maxhp
 
-class Blastoise(pygame.sprite.Sprite):
-    
-    # Construtor da classe.
-    def __init__(self):
-        
-        # Construtor da classe pai (Sprite).
-        pygame.sprite.Sprite.__init__(self)
-        
-        blastoise_img = pygame.image.load(path.join(img_dir, "9.png"))
-        self.image = blastoise_img
-        self.image.set_colorkey(WHITE)
-        self.image = pygame.transform.scale(self.image,(120,140))
-        # Detalhes sobre o posicionamento.
-        self.rect = self.image.get_rect()
-        
-        # Centraliza embaixo da tela.
-        self.rect.centerx = 598
-        self.rect.bottom =  220
-        
-        self.maxhp = 296
-        self.hp = self.maxhp
 
         
         
@@ -134,6 +113,9 @@ def combate(screen):
     turno = True
     time =0
     
+    
+    ataque = 0
+    time_ataque=pygame.time.get_ticks()
     while running:
         if MUSICA:
             pygame.mixer.music.set_volume(0.2)
@@ -151,12 +133,13 @@ def combate(screen):
             if pygame.mouse.get_pressed()[0]:
                 x = pygame.mouse.get_pos()[0]
                 y =  pygame.mouse.get_pos()[1]
+                print("x{0} - y {1}".format(x,y))
                 if turno:
                     time = pygame.time.get_ticks()
                     defesa = 0
-                    
                     if x > 404 and x < 576 and  y > 352 and y < 385  :
-                        ataque = random.randint(0,100)
+                        ataque = random.randint(1,100)
+                        time_ataque=pygame.time.get_ticks()
                         if ataque >= 90:
                             print('ataque crítico')
                             enemy.hp -= 50
@@ -238,14 +221,13 @@ def combate(screen):
         barra.fill(GREEN)
         screen.blit(barra, (630, 272))
         
-<<<<<<< HEAD
+
         if enemy.hp <= 0 or rayquaza.hp <= 0:
-=======
-        if blastoise.hp <= 0 or rayquaza.hp <= 0:
+
             pygame.mixer.music.stop()
             pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
             pygame.mixer.music.play()
->>>>>>> 4d08af28f026b6628bf8e477af70eed9de5b36f4
+
             running = False
         
         escreve(fonte_pequena,'Blastoise',(  0,H - 367), screen, BLACK)
@@ -257,13 +239,26 @@ def combate(screen):
         if turno:
             escreve(FONTE,"O que Dragonite" , (50, H - 50), screen, BLACK) 
             escreve(FONTE,"fará?", (50, H - 20), screen, BLACK)
+           
+            now = pygame.time.get_ticks()
+            if ataque >= 90 and (now-time_ataque>2000):
+                
+                 square = pygame.Surface((215,70))
+                 square.fill(WHITE)
+                 screen.blit(square, (50, H - 50) )
+                 escreve(FONTE,"Ataque crítico", (50, H - 20), screen, BLACK)
+            elif now-time_ataque>2000:
+                square = pygame.Surface((330,75))
+                square.fill(WHITE)
+                screen.blit(square, (31, 355) )
+                escreve(FONTE,"a", (50, H - 20), screen, BLACK)                
         elif not turno:
             escreve(FONTE,"Vez do adversário!" , (30, H - 50), screen, BLACK) 
             
                  
         
         
-        # Depois de desenhar tudo, inverte o display.
+        # Depois de desenhar tudo, inverte o dispay.
         pygame.display.flip()
         
     return 42
