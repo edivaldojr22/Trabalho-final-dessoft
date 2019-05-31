@@ -2,13 +2,10 @@ import pygame
 from os import path
 import random
 
-
-music_dir = path.join(path.dirname(__file__), 'music')
-pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.init()
+
 img_dir = path.join(path.dirname(__file__), 'img')
-
-
+fnt_dir = path.join(path.dirname(__file__), 'fonte')
 
 # Dados gerais do jogo.
 W, H = 800, 447
@@ -24,6 +21,9 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 
+FONTE = pygame.font.Font(path.join(fnt_dir, "fonte.ttf"), 18)
+FONTE.set_bold(True)
+
 
 class Blastoise(pygame.sprite.Sprite):
     
@@ -35,7 +35,7 @@ class Blastoise(pygame.sprite.Sprite):
         
         blastoise_img = pygame.image.load(path.join(img_dir, "9.png"))
         self.image = blastoise_img
-        self.image.set_colorkey(BLACK)
+        self.image.set_colorkey(WHITE)
         self.image = pygame.transform.scale(self.image,(120,140))
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
@@ -56,7 +56,7 @@ class pokemon_do_player(pygame.sprite.Sprite):
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
-        rayquaza_img = pygame.image.load(path.join(img_dir, "rayquaza.png"))
+        rayquaza_img = pygame.image.load(path.join(img_dir, "149.png"))
         self.image = rayquaza_img
         self.image.set_colorkey(WHITE)
         self.image = pygame.transform.scale(self.image,(120,140))
@@ -65,12 +65,18 @@ class pokemon_do_player(pygame.sprite.Sprite):
         
         # Centraliza embaixo da tela.
         self.rect.centerx = 206
-        self.rect.bottom =  350
+        self.rect.bottom =  340
         
         self.maxhp = 461
         self.hp = self.maxhp
         
 
+def escreve(msg, pos, screen, cor):
+    text_surface = FONTE.render(msg, True, cor)
+    text_rect = text_surface.get_rect()
+    text_rect.bottomleft = pos
+    screen.blit(text_surface, text_rect)
+    
 
 def combate(screen):
     #font = pygame.font.Font(path.join(fnt_dir, "PressStart2P.ttf"), 28)
@@ -93,16 +99,10 @@ def combate(screen):
 
     # Loop principal.
     running = True
-    MUSICA = True
     turno = True
     time =0
     
     while running:
-        if MUSICA:
-            pygame.mixer.music.set_volume(0.2)
-            pygame.mixer.music.load(path.join(music_dir, "musica_luta.mp3"))
-            pygame.mixer.music.play()
-            MUSICA = False
         # Ajusta a velocidade do jogo.
         clock.tick(FPS) 
         # Processa os eventos (mouse, teclado, botão, etc).
@@ -136,11 +136,7 @@ def combate(screen):
                         fuga = random.randint(0,100)
                         if fuga > 5:
                             print('fuga bem sucedida!')
-                            pygame.mixer.music.stop()
-                            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-                            pygame.mixer.music.play()
                             running = False
-                            
                         else:
                             print('se ferrou arregão!')
                             turno = False
@@ -169,6 +165,8 @@ def combate(screen):
                     print('Errrrou')
                 turno = True
                     
+        
+        
 
         # A cada loop, redesenha o fundo e os sprites
         screen.blit(background, (background_x, background_y))  # draws our first bg image
@@ -180,10 +178,6 @@ def combate(screen):
         if blastoise.hp < 0:
             hp = 0
             running = False
-            pygame.mixer.music.stop()
-            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-            pygame.mixer.music.play()
-
         bar = pygame.Surface((154*hp/maxhp, 9))
         bar.fill(GREEN)
         screen.blit(bar, (157, 88))
@@ -193,23 +187,25 @@ def combate(screen):
         if rayquaza.hp <0:
             hp2 = 0
             running = False
-            pygame.mixer.music.stop()
-            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-            pygame.mixer.music.play()
         barra = pygame.Surface((152*hp2/maxhp2, 9))
         barra.fill(GREEN)
         screen.blit(barra, (630, 272))
         
-        
-        
-
         if blastoise.hp <= 0 or rayquaza.hp <= 0:
-            pygame.mixer.music.stop()
-            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-            pygame.mixer.music.play()
             running = False
         
-        #text_img = font.render("Oi", True, BLUE)
+        
+        escreve('50',(292, H - 367),screen, BLACK)
+        escreve('50',(760, H - 184),screen, BLACK)
+        escreve('{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
+
+        if turno:
+            escreve("O que Dragonite" , (50, H - 50), screen, BLACK) 
+            escreve("fará?", (50, H - 20), screen, BLACK)
+        elif not turno:
+            escreve("Vez do adversário!" , (30, H - 50), screen, BLACK) 
+            
+                 
         
         
         # Depois de desenhar tudo, inverte o display.
@@ -218,20 +214,20 @@ def combate(screen):
     return 42
 
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
     
      #Inicialização do Pygame.
-    #pygame.init()
-    #pygame.mixer.init()
+    pygame.init()
+    pygame.mixer.init()
     
     # Tamanho da tela.
-    #screen = pygame.display.set_mode((W, H))
+    screen = pygame.display.set_mode((W, H))
     
     # Nome do jogo
-    #pygame.display.set_caption("Pokemon")
+    pygame.display.set_caption("Pokemon")
     
-    #try:
-     #   combate(screen)    
-    #finally:
-     #   pygame.quit()
+    try:
+        combate(screen)    
+    finally:
+        pygame.quit()
     
