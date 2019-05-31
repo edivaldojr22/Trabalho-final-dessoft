@@ -25,7 +25,8 @@ YELLOW = (255, 255, 0)
 
 FONTE = pygame.font.Font(path.join(fnt_dir, "fonte.ttf"), 18)
 FONTE.set_bold(True)
-
+fonte_pequena = pygame.font.Font(path.join(fnt_dir, "fonte.ttf"), 12)
+fonte_pequena.set_bold(True)
 
 class Blastoise(pygame.sprite.Sprite):
     
@@ -48,6 +49,30 @@ class Blastoise(pygame.sprite.Sprite):
         
         self.maxhp = 394
         self.hp = self.maxhp
+
+class Blastoise(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "9.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 296
+        self.hp = self.maxhp
+
+        
         
 
 class pokemon_do_player(pygame.sprite.Sprite):
@@ -73,8 +98,8 @@ class pokemon_do_player(pygame.sprite.Sprite):
         self.hp = self.maxhp
         
 
-def escreve(msg, pos, screen, cor):
-    text_surface = FONTE.render(msg, True, cor)
+def escreve(fonte,msg, pos, screen, cor):
+    text_surface = fonte.render(msg, True, cor)
     text_rect = text_surface.get_rect()
     text_rect.bottomleft = pos
     screen.blit(text_surface, text_rect)
@@ -91,9 +116,13 @@ def combate(screen):
     background_x = 0
     background_y = 0
 
-    blastoise = Blastoise() 
+    escolha = random.randrange(2)
+    if escolha == 0:
+        enemy = Blastoise()
+    elif escolha == 1:
+        enemy = pokemon_do_player()
     all_sprites = pygame.sprite.Group()
-    all_sprites.add(blastoise)
+    all_sprites.add(enemy)
     rayquaza = pokemon_do_player() 
     all_sprites.add(rayquaza)
 
@@ -130,9 +159,9 @@ def combate(screen):
                         ataque = random.randint(0,100)
                         if ataque >= 90:
                             print('ataque crítico')
-                            blastoise.hp -= 50
+                            enemy.hp -= 50
                         elif ataque >= 5:
-                            blastoise.hp -=20
+                            enemy.hp -=20
                         else :
                             print('Errrrou')
                         turno= False
@@ -183,10 +212,10 @@ def combate(screen):
         screen.blit(background, (background_x, background_y))  # draws our first bg image
         all_sprites.draw(screen)
         
-        # Desenha o power bar do blastoise.
-        hp= blastoise.hp
-        maxhp = blastoise.maxhp
-        if blastoise.hp < 0:
+        # Desenha o power bar do enemy.
+        hp= enemy.hp
+        maxhp = enemy.maxhp
+        if enemy.hp < 0:
             hp = 0
             running = False
             pygame.mixer.music.stop()
@@ -209,22 +238,27 @@ def combate(screen):
         barra.fill(GREEN)
         screen.blit(barra, (630, 272))
         
+<<<<<<< HEAD
+        if enemy.hp <= 0 or rayquaza.hp <= 0:
+=======
         if blastoise.hp <= 0 or rayquaza.hp <= 0:
             pygame.mixer.music.stop()
             pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
             pygame.mixer.music.play()
+>>>>>>> 4d08af28f026b6628bf8e477af70eed9de5b36f4
             running = False
         
-        
-        escreve('50',(292, H - 367),screen, BLACK)
-        escreve('50',(760, H - 184),screen, BLACK)
-        escreve('{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
+        escreve(fonte_pequena,'Blastoise',(  0,H - 367), screen, BLACK)
+        escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
+        escreve(FONTE,'50',(292, H - 367),screen, BLACK)
+        escreve(FONTE,'50',(760, H - 184),screen, BLACK)
+        escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
 
         if turno:
-            escreve("O que Dragonite" , (50, H - 50), screen, BLACK) 
-            escreve("fará?", (50, H - 20), screen, BLACK)
+            escreve(FONTE,"O que Dragonite" , (50, H - 50), screen, BLACK) 
+            escreve(FONTE,"fará?", (50, H - 20), screen, BLACK)
         elif not turno:
-            escreve("Vez do adversário!" , (30, H - 50), screen, BLACK) 
+            escreve(FONTE,"Vez do adversário!" , (30, H - 50), screen, BLACK) 
             
                  
         
