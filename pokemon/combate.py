@@ -58,7 +58,7 @@ class pokemon_do_player(pygame.sprite.Sprite):
         
         rayquaza_img = pygame.image.load(path.join(img_dir, "rayquaza.png"))
         self.image = rayquaza_img
-        self.image.set_colorkey(WHITE)
+        self.image.set_colorkey(GREEN)
         self.image = pygame.transform.scale(self.image,(120,140))
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
