@@ -238,10 +238,7 @@ def combate(screen):
         barra.fill(GREEN)
         screen.blit(barra, (630, 272))
         
-<<<<<<< HEAD
         if enemy.hp <= 0 or rayquaza.hp <= 0:
-=======
-        if blastoise.hp <= 0 or rayquaza.hp <= 0:
             pygame.mixer.music.stop()
             pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
             pygame.mixer.music.play()
