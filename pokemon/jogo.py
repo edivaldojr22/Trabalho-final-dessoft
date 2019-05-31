@@ -13,13 +13,13 @@ music_dir = path.join(path.dirname(__file__), 'music')
 
 pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.init()
-pygame.mixer.music.set_volume(0.08)
+pygame.mixer.music.set_volume(0.2)
 pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
 pygame.mixer.music.play()
 
 # Dados gerais do jogo.
 W, H = 800, 447
-FPS = 30 # Frames por segundo
+FPS = 60 # Frames por segundo
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
@@ -86,6 +86,7 @@ def jogo(screen):
     background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
     background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_final.png')).convert()
     background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
+ 
     background_x = -700
     background_y = -600
     background_x_prev = background_x
@@ -152,10 +153,11 @@ def jogo(screen):
 
         if matinho.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)) and moving_state != MOVING_NONE:
             chance = random.randint(0, 100)
-            if chance < 5:
+            if chance < 2:
                 pygame.mixer.music.stop()
                 combate(screen)
                 moving_state = MOVING_NONE 
+
                 
 
         # A cada loop, redesenha o fundo e os sprites
