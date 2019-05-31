@@ -56,7 +56,7 @@ class pokemon_do_player(pygame.sprite.Sprite):
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
-        rayquaza_img = pygame.image.load(path.join(img_dir, "rayquaza.png"))
+        rayquaza_img = pygame.image.load(path.join(img_dir, "149.png"))
         self.image = rayquaza_img
         self.image.set_colorkey(WHITE)
         self.image = pygame.transform.scale(self.image,(120,140))
@@ -65,7 +65,7 @@ class pokemon_do_player(pygame.sprite.Sprite):
         
         # Centraliza embaixo da tela.
         self.rect.centerx = 206
-        self.rect.bottom =  350
+        self.rect.bottom =  340
         
         self.maxhp = 461
         self.hp = self.maxhp
@@ -194,9 +194,19 @@ def combate(screen):
         if blastoise.hp <= 0 or rayquaza.hp <= 0:
             running = False
         
-        escreve("A WILD BLASTOISE", (60, H - 50), screen, BLACK)
-        escreve("APPEARS!", (60, H - 20), screen, BLACK)
-        escreve("Rayquaza", (420, H - 170), screen, BLACK)
+        
+        escreve('50',(292, H - 367),screen, BLACK)
+        escreve('50',(760, H - 184),screen, BLACK)
+        escreve('{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
+
+        if turno:
+            escreve("O que Dragonite" , (50, H - 50), screen, BLACK) 
+            escreve("fará?", (50, H - 20), screen, BLACK)
+        elif not turno:
+            escreve("Vez do adversário!" , (30, H - 50), screen, BLACK) 
+            
+                 
+        
         
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
