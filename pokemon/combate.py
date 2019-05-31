@@ -2,8 +2,10 @@ import pygame
 from os import path
 import random
 
+pygame.init()
 
 img_dir = path.join(path.dirname(__file__), 'img')
+fnt_dir = path.join(path.dirname(__file__), 'fonte')
 
 # Dados gerais do jogo.
 W, H = 800, 447
@@ -18,6 +20,10 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
+
+FONTE = pygame.font.Font(path.join(fnt_dir, "fonte.ttf"), 18)
+FONTE.set_bold(True)
+
 
 class Blastoise(pygame.sprite.Sprite):
     
@@ -65,6 +71,12 @@ class pokemon_do_player(pygame.sprite.Sprite):
         self.hp = self.maxhp
         
 
+def escreve(msg, pos, screen, cor):
+    text_surface = FONTE.render(msg, True, cor)
+    text_rect = text_surface.get_rect()
+    text_rect.bottomleft = pos
+    screen.blit(text_surface, text_rect)
+    
 
 def combate(screen):
     #font = pygame.font.Font(path.join(fnt_dir, "PressStart2P.ttf"), 28)
@@ -91,7 +103,6 @@ def combate(screen):
     time =0
     
     while running:
-        
         # Ajusta a velocidade do jogo.
         clock.tick(FPS) 
         # Processa os eventos (mouse, teclado, botão, etc).
@@ -154,6 +165,8 @@ def combate(screen):
                     print('Errrrou')
                 turno = True
                     
+        
+        
 
         # A cada loop, redesenha o fundo e os sprites
         screen.blit(background, (background_x, background_y))  # draws our first bg image
@@ -178,14 +191,12 @@ def combate(screen):
         barra.fill(GREEN)
         screen.blit(barra, (630, 272))
         
-        
-        
-
         if blastoise.hp <= 0 or rayquaza.hp <= 0:
             running = False
         
-        #text_img = font.render("Oi", True, BLUE)
-        
+        escreve("A WILD BLASTOISE", (60, H - 50), screen, BLACK)
+        escreve("APPEARS!", (60, H - 20), screen, BLACK)
+        escreve("Rayquaza", (420, H - 170), screen, BLACK)
         
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
@@ -193,20 +204,20 @@ def combate(screen):
     return 42
 
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
     
      #Inicialização do Pygame.
-    #pygame.init()
-    #pygame.mixer.init()
+    pygame.init()
+    pygame.mixer.init()
     
     # Tamanho da tela.
-    #screen = pygame.display.set_mode((W, H))
+    screen = pygame.display.set_mode((W, H))
     
     # Nome do jogo
-    #pygame.display.set_caption("Pokemon")
+    pygame.display.set_caption("Pokemon")
     
-    #try:
-     #   combate(screen)    
-    #finally:
-     #   pygame.quit()
+    try:
+        combate(screen)    
+    finally:
+        pygame.quit()
     
