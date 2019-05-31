@@ -50,7 +50,7 @@ class Blastoise(pygame.sprite.Sprite):
         self.maxhp = 394
         self.hp = self.maxhp
 
-class Blastoise(pygame.sprite.Sprite):
+class Charizard(pygame.sprite.Sprite):
     
     # Construtor da classe.
     def __init__(self):
@@ -58,7 +58,7 @@ class Blastoise(pygame.sprite.Sprite):
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
-        blastoise_img = pygame.image.load(path.join(img_dir, "9.png"))
+        blastoise_img = pygame.image.load(path.join(img_dir, "317.png"))
         self.image = blastoise_img
         self.image.set_colorkey(WHITE)
         self.image = pygame.transform.scale(self.image,(120,140))
@@ -69,7 +69,7 @@ class Blastoise(pygame.sprite.Sprite):
         self.rect.centerx = 598
         self.rect.bottom =  220
         
-        self.maxhp = 296
+        self.maxhp = 396
         self.hp = self.maxhp
 
         
@@ -120,7 +120,7 @@ def combate(screen):
     if escolha == 0:
         enemy = Blastoise()
     elif escolha == 1:
-        enemy = pokemon_do_player()
+        enemy = Charizard()
     all_sprites = pygame.sprite.Group()
     all_sprites.add(enemy)
     rayquaza = pokemon_do_player() 
@@ -238,14 +238,13 @@ def combate(screen):
         barra.fill(GREEN)
         screen.blit(barra, (630, 272))
         
-<<<<<<< HEAD
+
         if enemy.hp <= 0 or rayquaza.hp <= 0:
-=======
-        if blastoise.hp <= 0 or rayquaza.hp <= 0:
+
             pygame.mixer.music.stop()
             pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
             pygame.mixer.music.play()
->>>>>>> 4d08af28f026b6628bf8e477af70eed9de5b36f4
+
             running = False
         
         escreve(fonte_pequena,'Blastoise',(  0,H - 367), screen, BLACK)
