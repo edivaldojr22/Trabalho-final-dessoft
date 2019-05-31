@@ -86,6 +86,8 @@ def jogo(screen):
     background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
     background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_final.png')).convert()
     background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
+    background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
+    
     background_x = -700
     background_y = -600
     background_x_prev = background_x
@@ -93,6 +95,7 @@ def jogo(screen):
 
     background_mask = pygame.mask.from_threshold(background_mask_img, (0, 0, 0), (20,20,20,255))
     matinho = pygame.mask.from_threshold(background_mask_mato, (0, 0, 0), (20,20,20,255))
+    caverna = pygame.mask.from_threshold(background_caverna, (0, 0, 0), (20,20,20,255))
 
     moving_state = MOVING_NONE
 
