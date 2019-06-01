@@ -86,7 +86,11 @@ def jogo(screen):
     background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
     background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_final.png')).convert()
     background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
+<<<<<<< HEAD
     #background_mask_entrada_caverna_1 = pygame.image.load(path.join(img_dir, 'caverna_entradas_mascara.png')).convert()
+=======
+    background_mask_entrada_caverna_1 = pygame.image.load(path.join(img_dir, 'caverna_entradas_mascara.jpeg')).convert()
+>>>>>>> refs/remotes/origin/master
     
     background_x = -700
     background_y = -600
@@ -95,7 +99,11 @@ def jogo(screen):
 
     background_mask = pygame.mask.from_threshold(background_mask_img, (0, 0, 0), (20,20,20,255))
     matinho = pygame.mask.from_threshold(background_mask_mato, (0, 0, 0), (20,20,20,255))
+<<<<<<< HEAD
     #caverna_entrada_1 = pygame.mask.from_threshold(background_mask_entrada_caverna, (0, 0, 0), (20,20,20,255))
+=======
+    caverna_entrada_1 = pygame.mask.from_threshold(background_mask_entrada_caverna_1, (0, 0, 0), (20,20,20,255))
+>>>>>>> refs/remotes/origin/master
 
     moving_state = MOVING_NONE
 
@@ -159,6 +167,12 @@ def jogo(screen):
                 pygame.mixer.music.stop()
                 combate(screen,hp_player)
                 moving_state = MOVING_NONE 
+        if caverna_entrada_1(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
+            pygame.mixer.music.stop()
+            pygame.mixer.music.set_volume(0.2)
+            pygame.mixer.music.load(path.join(music_dir, "musica_caverna.mp3"))
+            pygame.mixer.music.play()
+            caverna(screen)
                 
 
         # A cada loop, redesenha o fundo e os sprites

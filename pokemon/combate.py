@@ -73,6 +73,7 @@ class Charizard(pygame.sprite.Sprite):
         self.hp = self.maxhp
 
 
+
 class Mewtwo(pygame.sprite.Sprite):
     
     # Construtor da classe.
@@ -665,6 +666,9 @@ def combate(screen, hp_player):
     turno = True
     time =0
     
+    
+    ataque = 0
+    time_ataque=pygame.time.get_ticks()
     while running:
         if MUSICA:
             pygame.mixer.music.set_volume(0.2)
@@ -682,12 +686,13 @@ def combate(screen, hp_player):
             if pygame.mouse.get_pressed()[0]:
                 x = pygame.mouse.get_pos()[0]
                 y =  pygame.mouse.get_pos()[1]
+                print("x{0} - y {1}".format(x,y))
                 if turno:
                     time = pygame.time.get_ticks()
                     defesa = 0
-                    
                     if x > 404 and x < 576 and  y > 352 and y < 385  :
-                        ataque = random.randint(0,100)
+                        ataque = random.randint(1,100)
+                        time_ataque=pygame.time.get_ticks()
                         if ataque >= 90:
                             print('ataque crítico')
                             enemy.hp -= 50
@@ -717,7 +722,7 @@ def combate(screen, hp_player):
         if not turno:
              now = pygame.time.get_ticks()
              diff= now - time
-             if diff> 1000:
+             if diff> 2000:
                 print('Vez do adversário!')
                 ataque_do_adversario = random.randint(0,100)
                 if ataque_do_adversario >= 90:
@@ -750,22 +755,40 @@ def combate(screen, hp_player):
         maxhp = enemy.maxhp
         if enemy.hp < 0:
             hp = 0
-           
-           
+            rayquaza.xp += random.randint(20,40)
+            running = False
             
          
 
         bar = pygame.Surface((154*hp/maxhp, 9))
-        bar.fill(GREEN)
+        if hp > maxhp/2:
+            bar.fill(GREEN)
+        elif hp > maxhp / 9:
+            bar.fill(YELLOW)
+        else:
+            bar.fill(RED)
         screen.blit(bar, (157, 88))
         
         hp2 = rayquaza.hp
         maxhp2 = rayquaza.maxhp
+        
+        
         if rayquaza.hp <0:
             hp2 = 0
+            running = False
         barra = pygame.Surface((152*hp2/maxhp2, 9))
-        barra.fill(GREEN)
+        if hp2 > maxhp2/2:
+            barra.fill(GREEN)
+        elif hp2 > maxhp2 / 9:
+            barra.fill(YELLOW)
+        else:
+            barra.fill(RED)
         screen.blit(barra, (630, 272))
+        
+        
+        barraxp =  pygame.Surface((rayquaza.xp,4))
+        barraxp.fill(BLUE)
+        screen.blit(barraxp, (482, 315))
         
 
         if enemy.hp <= 0 or rayquaza.hp <= 0:
@@ -774,7 +797,6 @@ def combate(screen, hp_player):
             pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
             pygame.mixer.music.play()
 
-            running = False
         
         
         escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
@@ -838,13 +860,27 @@ def combate(screen, hp_player):
         if turno:
             escreve(FONTE,"O que Dragonite" , (50, H - 50), screen, BLACK) 
             escreve(FONTE,"fará?", (50, H - 20), screen, BLACK)
+           
+            now = pygame.time.get_ticks()
+            if ataque >= 90 and (now-time_ataque>2000):
+                
+                 square = pygame.Surface((215,70))
+                 square.fill(WHITE)
+                 screen.blit(square, (50, H - 50) )
+                 escreve(FONTE,"Ataque crítico", (50, H - 50), screen, BLACK)
+                 
+            elif now-time_ataque>2000:
+                square = pygame.Surface((330,75))
+                square.fill(WHITE)
+                screen.blit(square, (31, 355) )
+                escreve(FONTE,"a", (50, H - 20), screen, BLACK)                
         elif not turno:
             escreve(FONTE,"Vez do adversário!" , (30, H - 50), screen, BLACK) 
             
                  
         
         
-        # Depois de desenhar tudo, inverte o display.
+        # Depois de desenhar tudo, inverte o dispay.
         pygame.display.flip()
         
     return 42, rayquaza.hp
