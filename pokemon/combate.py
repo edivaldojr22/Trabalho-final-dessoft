@@ -47,7 +47,7 @@ class Blastoise(pygame.sprite.Sprite):
         self.rect.centerx = 598
         self.rect.bottom =  220
         
-        self.maxhp = 394
+        self.maxhp = 196
         self.hp = self.maxhp
 
 class Charizard(pygame.sprite.Sprite):
@@ -58,7 +58,7 @@ class Charizard(pygame.sprite.Sprite):
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
-        blastoise_img = pygame.image.load(path.join(img_dir, "317.png"))
+        blastoise_img = pygame.image.load(path.join(img_dir, "6.png"))
         self.image = blastoise_img
         self.image.set_colorkey(WHITE)
         self.image = pygame.transform.scale(self.image,(120,140))
@@ -69,12 +69,490 @@ class Charizard(pygame.sprite.Sprite):
         self.rect.centerx = 598
         self.rect.bottom =  220
         
-        self.maxhp = 396
+        self.maxhp = 187
+        self.hp = self.maxhp
+
+
+class Mewtwo(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "150.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 360
+        self.hp = self.maxhp
+class Mew(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "151.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 330
+        self.hp = self.maxhp        
+class Bulbasaur(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "1.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 97
+        self.hp = self.maxhp        
+class Venosaur(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "150.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 201
+        self.hp = self.maxhp        
+class Charmander(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "4.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 92
+        self.hp = self.maxhp
+        
+class Squirtle(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "7.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 87
+        self.hp = self.maxhp        
+        
+class Ratata(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "19.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 24
+        self.hp = self.maxhp        
+        
+class Pikachu(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "25.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 75
+        self.hp = self.maxhp       
+class Zubat(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "41.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 51
+        self.hp = self.maxhp        
+class Diglet(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "50.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 36
+        self.hp = self.maxhp
+
+class Psyduck(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "54.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 52
+        self.hp = self.maxhp
+
+class Machamp(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "68.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 92
+        self.hp = self.maxhp
+
+class Golem(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "76.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 124
+        self.hp = self.maxhp
+
+class Gengar(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "94.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 145
+        self.hp = self.maxhp
+
+
+class Onix(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "95.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 162
+        self.hp = self.maxhp
+
+class Gyarados(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "130.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 167
+        self.hp = self.maxhp
+
+class Lapras(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "131.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 202
+        self.hp = self.maxhp
+
+class Snorlax(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "143.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 252
+        self.hp = self.maxhp
+
+class Articuno(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "144.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 302
+        self.hp = self.maxhp
+
+class Zapdos(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "145.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 306
+        self.hp = self.maxhp
+
+class Moltres(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "146.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 301
+        self.hp = self.maxhp
+
+class Dragonite(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        blastoise_img = pygame.image.load(path.join(img_dir, "149.png"))
+        self.image = blastoise_img
+        self.image.set_colorkey(WHITE)
+        self.image = pygame.transform.scale(self.image,(120,140))
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.centerx = 598
+        self.rect.bottom =  220
+        
+        self.maxhp = 276
         self.hp = self.maxhp
 
         
-        
-
 class pokemon_do_player(pygame.sprite.Sprite):
     
     # Construtor da classe.
@@ -94,7 +572,7 @@ class pokemon_do_player(pygame.sprite.Sprite):
         self.rect.centerx = 206
         self.rect.bottom =  340
         
-        self.maxhp = 461
+        self.maxhp = 226
         self.hp = self.maxhp
         
 
@@ -116,11 +594,60 @@ def combate(screen):
     background_x = 0
     background_y = 0
 
-    escolha = random.randrange(2)
+    escolha = random.randrange(24)
     if escolha == 0:
         enemy = Blastoise()
     elif escolha == 1:
         enemy = Charizard()
+    elif escolha == 2:
+        enemy = Mewtwo()
+    elif escolha == 3:
+        enemy = Mew()    
+    elif escolha == 4:
+        enemy = Charmander()    
+    elif escolha == 5:
+        enemy = Bulbasaur()    
+    elif escolha == 6:
+        enemy = Venosaur()   
+    elif escolha == 7:
+        enemy = Squirtle()    
+    elif escolha == 8:
+        enemy = Ratata()
+    elif escolha == 9:
+        enemy = Pikachu()    
+    elif escolha == 10:
+        enemy = Zubat()
+    elif escolha == 11:
+        enemy = Diglet()    
+    elif escolha == 12:
+        enemy = Psyduck()
+    elif escolha == 13:
+        enemy = Machamp()
+    elif escolha == 14:
+        enemy = Golem()    
+    elif escolha == 15:
+        enemy = Gengar()    
+    elif escolha == 16:
+        enemy = Onix()    
+    elif escolha == 17:
+        enemy = Gyarados()
+    elif escolha == 18:
+        enemy = Lapras()    
+    elif escolha == 19:
+        enemy =Snorlax()
+    elif escolha == 20:
+        enemy = Articuno()    
+    elif escolha == 21:
+        enemy = Zapdos() 
+    elif escolha == 22:
+        enemy = Moltres()    
+    elif escolha == 23:
+        enemy = Dragonite()
+        
+        
+        
+        
+        
     all_sprites = pygame.sprite.Group()
     all_sprites.add(enemy)
     rayquaza = pokemon_do_player() 
@@ -247,12 +774,65 @@ def combate(screen):
 
             running = False
         
-        escreve(fonte_pequena,'Blastoise',(  0,H - 367), screen, BLACK)
+        
         escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
         escreve(FONTE,'50',(292, H - 367),screen, BLACK)
         escreve(FONTE,'50',(760, H - 184),screen, BLACK)
         escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
-
+        
+        
+        
+        if escolha == 0:
+            escreve(fonte_pequena,'Blastoise',(  0,H - 367), screen, BLACK)
+        elif escolha == 1:
+            escreve(fonte_pequena,'Charizard',(  0,H - 367), screen, BLACK)
+        elif escolha == 2:
+            escreve(fonte_pequena,'Mewtwo',(  0,H - 367), screen, BLACK)    
+        elif escolha == 3:
+            escreve(fonte_pequena,'Mew',(  0,H - 367), screen, BLACK)
+        elif escolha == 4:
+            escreve(fonte_pequena,'Charmander',(  0,H - 367), screen, BLACK)
+        elif escolha == 5:
+            escreve(fonte_pequena,'Bulbasaur',(  0,H - 367), screen, BLACK)    
+        elif escolha == 6:
+            escreve(fonte_pequena,'Venusaur',(  0,H - 367), screen, BLACK) 
+        elif escolha == 7:
+            escreve(fonte_pequena,'Squirtle',(  0,H - 367), screen, BLACK)    
+        elif escolha == 8:
+            escreve(fonte_pequena,'Ratata',(  0,H - 367), screen, BLACK)     
+        elif escolha == 9:
+            escreve(fonte_pequena,'Pikachu',(  0,H - 367), screen, BLACK)
+        elif escolha == 10:
+            escreve(fonte_pequena,'Zubat',(  0,H - 367), screen, BLACK)     
+        elif escolha == 11:
+            escreve(fonte_pequena,'Diglet',(  0,H - 367), screen, BLACK)     
+        elif escolha == 12:
+            escreve(fonte_pequena,'Psyduck',(  0,H - 367), screen, BLACK)     
+        elif escolha == 13:
+            escreve(fonte_pequena,'Machamp',(  0,H - 367), screen, BLACK)     
+        elif escolha == 14:
+            escreve(fonte_pequena,'Golem',(  0,H - 367), screen, BLACK)    
+        elif escolha == 15:
+            escreve(fonte_pequena,'Gengar',(  0,H - 367), screen, BLACK)    
+        elif escolha == 16:
+            escreve(fonte_pequena,'Onix',(  0,H - 367), screen, BLACK)    
+        elif escolha == 17:
+            escreve(fonte_pequena,'Gyarados',(  0,H - 367), screen, BLACK)    
+        elif escolha == 18:
+            escreve(fonte_pequena,'Lapras',(  0,H - 367), screen, BLACK)
+        elif escolha == 19:
+            escreve(fonte_pequena,'Snorlax',(  0,H - 367), screen, BLACK)    
+        elif escolha == 20:
+            escreve(fonte_pequena,'Articuno',(  0,H - 367), screen, BLACK)    
+        elif escolha == 21:
+            escreve(fonte_pequena,'Zapdos',(  0,H - 367), screen, BLACK)    
+        elif escolha == 22:
+            escreve(fonte_pequena,'Moltres',(  0,H - 367), screen, BLACK)    
+        elif escolha == 23:
+            escreve(fonte_pequena,'Dragonite',(  0,H - 367), screen, BLACK)    
+            
+            
+            
         if turno:
             escreve(FONTE,"O que Dragonite" , (50, H - 50), screen, BLACK) 
             escreve(FONTE,"fará?", (50, H - 20), screen, BLACK)
