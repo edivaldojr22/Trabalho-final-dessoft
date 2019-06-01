@@ -4,7 +4,7 @@
 import pygame
 from os import path
 import random
-from combate import combate
+from combate import combate, pokemon_do_player
 
 # Estabelece a pasta que contem as figuras.
 img_dir = path.join(path.dirname(__file__), 'img')
@@ -157,7 +157,7 @@ def jogo(screen):
             chance = random.randint(0, 100)
             if chance < 2:
                 pygame.mixer.music.stop()
-                combate(screen)
+                combate(screen,hp_player)
                 moving_state = MOVING_NONE 
                 
 
@@ -179,8 +179,11 @@ pygame.mixer.init()
 screen = pygame.display.set_mode((W, H))
 
 # Nome do jogo
-pygame.display.set_caption("Pokphyton")
+pygame.display.set_caption("Pokephyton")
 
+
+rayquaza = pokemon_do_player()
+hp_player = rayquaza.hp
 # Comando para evitar travamentos.
 try:
     state = INIT
@@ -188,7 +191,7 @@ try:
         if state == INIT:
             state = jogo(screen)
         elif state == COMBATE:
-            state = combate(screen)
+            state = combate(screen,hp_player)
             print(state)
         else:
             state = QUIT

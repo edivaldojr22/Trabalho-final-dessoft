@@ -574,7 +574,8 @@ class pokemon_do_player(pygame.sprite.Sprite):
         
         self.maxhp = 226
         self.hp = self.maxhp
-        
+        self.xp = 0
+        self.level = 50
 
 def escreve(fonte,msg, pos, screen, cor):
     text_surface = fonte.render(msg, True, cor)
@@ -583,7 +584,10 @@ def escreve(fonte,msg, pos, screen, cor):
     screen.blit(text_surface, text_rect)
     
 
-def combate(screen):
+rayquaza = pokemon_do_player()
+hp_player = rayquaza.hp
+
+def combate(screen, hp_player):
     #font = pygame.font.Font(path.join(fnt_dir, "PressStart2P.ttf"), 28)
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
@@ -734,6 +738,8 @@ def combate(screen):
                     
         
         
+        
+        
 
         # A cada loop, redesenha o fundo e os sprites
         screen.blit(background, (background_x, background_y))  # draws our first bg image
@@ -744,10 +750,10 @@ def combate(screen):
         maxhp = enemy.maxhp
         if enemy.hp < 0:
             hp = 0
-            running = False
-            pygame.mixer.music.stop()
-            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-            pygame.mixer.music.play()
+           
+           
+            
+         
 
         bar = pygame.Surface((154*hp/maxhp, 9))
         bar.fill(GREEN)
@@ -757,10 +763,6 @@ def combate(screen):
         maxhp2 = rayquaza.maxhp
         if rayquaza.hp <0:
             hp2 = 0
-            running = False
-            pygame.mixer.music.stop()
-            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-            pygame.mixer.music.play()
         barra = pygame.Surface((152*hp2/maxhp2, 9))
         barra.fill(GREEN)
         screen.blit(barra, (630, 272))
@@ -776,7 +778,7 @@ def combate(screen):
         
         
         escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-        escreve(FONTE,'50',(292, H - 367),screen, BLACK)
+        escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
         escreve(FONTE,'50',(760, H - 184),screen, BLACK)
         escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
         
@@ -845,7 +847,8 @@ def combate(screen):
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
         
-    return 42
+    return 42, rayquaza.hp
+
 
 
 if __name__ == "__main__":
@@ -861,7 +864,7 @@ if __name__ == "__main__":
     pygame.display.set_caption("Pokemon")
     
     try:
-        combate(screen)    
+        combate(screen,hp_player)    
     finally:
         pygame.quit()
     
