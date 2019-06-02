@@ -86,6 +86,10 @@ def jogo(screen):
     background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
     background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_final.png')).convert()
     background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
+<<<<<<< HEAD
+=======
+
+>>>>>>> c3005484f6cac943445aee6d31669aa46e5df1bd
     #background_mask_entrada_caverna_1 = pygame.image.load(path.join(img_dir, 'caverna_entradas_mascara.png')).convert()
 
     background_mask_entrada_caverna_1 = pygame.image.load(path.join(img_dir, 'caverna_entradas_mascara.jpeg')).convert()
@@ -100,6 +104,10 @@ def jogo(screen):
     matinho = pygame.mask.from_threshold(background_mask_mato, (0, 0, 0), (20,20,20,255))
 
     #caverna_entrada_1 = pygame.mask.from_threshold(background_mask_entrada_caverna, (0, 0, 0), (20,20,20,255))
+<<<<<<< HEAD
+=======
+
+>>>>>>> c3005484f6cac943445aee6d31669aa46e5df1bd
     caverna_entrada_1 = pygame.mask.from_threshold(background_mask_entrada_caverna_1, (0, 0, 0), (20,20,20,255))
 
 

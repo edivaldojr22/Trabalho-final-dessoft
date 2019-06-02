@@ -561,7 +561,6 @@ class pokemon_do_player(pygame.sprite.Sprite):
         
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
-        
         rayquaza_img = pygame.image.load(path.join(img_dir, "149.png"))
         self.image = rayquaza_img
         self.image.set_colorkey(GREEN)
@@ -883,6 +882,7 @@ def combate(screen):
             escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
             escreve(FONTE,"O que Dragonite" , (50, H - 50), screen, BLACK) 
             escreve(FONTE,"fará?", (50, H - 20), screen, BLACK)
+
             
             
             
@@ -961,6 +961,10 @@ def combate(screen):
                 escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
                 escreve(FONTE,"Se ferrou trouxa!" , (30, H - 50), screen, BLACK)
               
+
+           
+                    
+
         elif not turno:
             agora = pygame.time.get_ticks()
             sub =  agora - inicio
