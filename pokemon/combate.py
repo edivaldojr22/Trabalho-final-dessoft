@@ -561,7 +561,6 @@ class pokemon_do_player(pygame.sprite.Sprite):
         
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
-        
         rayquaza_img = pygame.image.load(path.join(img_dir, "149.png"))
         self.image = rayquaza_img
         self.image.set_colorkey(GREEN)
@@ -873,7 +872,7 @@ def combate(screen, hp_player):
                 square = pygame.Surface((330,75))
                 square.fill(WHITE)
                 screen.blit(square, (31, 355) )
-                escreve(FONTE,"a", (50, H - 20), screen, BLACK)                
+                escreve(FONTE,"ataque normal", (50, H - 20), screen, BLACK)                
         elif not turno:
             escreve(FONTE,"Vez do adversário!" , (30, H - 50), screen, BLACK) 
             
