@@ -618,7 +618,8 @@ def escreve(fonte,msg, pos, screen, cor):
     text_rect.bottomleft = pos
     screen.blit(text_surface, text_rect)
     
-def pokemon_inimigo(escolha):
+def pokemon_inimigo(escolha,screen):
+    
     if escolha == 0:
         escreve(fonte_pequena,'Blastoise',(  0,H - 367), screen, BLACK)
     elif escolha == 1:
@@ -674,7 +675,7 @@ def desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,b
     screen.blit(bar, (157, 88))
     screen.blit(barra, (630, 272))
     screen.blit(barraxp, (482, 315))
-    pokemon_inimigo(escolha)
+    pokemon_inimigo(escolha,screen)
     escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
     escreve(FONTE,'{0}'.format(rayquaza.level),(760, H - 184),screen, BLACK)
     escreve(FONTE,'50',(292, H - 367),screen, BLACK)
@@ -831,25 +832,27 @@ def combate(screen,hp_atual, xp_atual):
                      pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
                      pygame.mixer.music.play()
                      running = False
-                
-             if diff> 3700:
+             
+             if diff> 3000 and diff < 3010 :
                  ataque_do_adversario = random.randint(1,100)
-                 
+             if diff> 3700:
                  if ataque_do_adversario >= 90:
                     dano = 22 + enemy.ataque - defesa
                     if dano < 0:
                         dano = 0
                     rayquaza.hp -= dano
+                   
                  elif ataque_do_adversario >=5:
                      dano = enemy.ataque - defesa
                      if dano < 0:
                          dano = 0
                      rayquaza.hp -= dano
+                     
                     
-                 else :
+                 elif ataque_do_adversario > 0:
                      dano = 0
                      rayquaza.hp -= dano
-                   
+                    
                  turno = True
                 
                 
@@ -873,21 +876,25 @@ def combate(screen,hp_atual, xp_atual):
         if enemy.hp <= 0:
             hp = 0
             now = pygame.time.get_ticks()
-            running = False 
-            if rayquaza.level < rayquaza.maxlevel:
-                xp_ganho = 300
-                rayquaza.xp += xp_ganho
-                xp_atual = rayquaza.xp
-                if xp_atual >= rayquaza.maxxp:
-                    xp_atual -= rayquaza.maxxp 
-                    rayquaza.level += 1
-                    rayquaza.maxhp += 8
-                    rayquaza.hp += 8
-                    rayquaza.ataque += 5
-            else:
+            if diff > 0 and diff < 50:
+                if rayquaza.level < rayquaza.maxlevel:
+                        xp_ganho = 300
+                        rayquaza.xp += xp_ganho
+                        xp_atual = rayquaza.xp
+                        if xp_atual >= rayquaza.maxxp:
+                            xp_atual -= rayquaza.maxxp 
+                            rayquaza.level += 1
+                            rayquaza.maxhp += 8
+                            rayquaza.hp += 8
+                            rayquaza.ataque += 5
+                else:
+                        running = False 
+                        xp_ganho = 0
+                        xp_atual = 0
+            if diff > 3000:
                 running = False 
-                xp_ganho = 0
-                xp_atual = 0
+                
+                
          
 
         bar = pygame.Surface((154*hp/maxhp, 9))
@@ -904,9 +911,9 @@ def combate(screen,hp_atual, xp_atual):
         
         now = pygame.time.get_ticks()
         if rayquaza.hp <= 0:
-            hp2 = 0
-            
-            if diff > 4000:
+            now = pygame.time.get_ticks()
+            if diff > 3000:
+                hp2 = 0
                 pygame.mixer.music.stop()
                 pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
                 pygame.mixer.music.play()
@@ -934,7 +941,7 @@ def combate(screen,hp_atual, xp_atual):
         
         
         
-        pokemon_inimigo(escolha)
+        pokemon_inimigo(escolha,screen)
         
         
         
@@ -944,15 +951,14 @@ def combate(screen,hp_atual, xp_atual):
             desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
             escreve(FONTE,"O que Dragonite" , (50, H - 50), screen, BLACK) 
             escreve(FONTE,"fará?", (50, H - 20), screen, BLACK)
-            
-            
-                
             if hp2 <=0:
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"Perdeu feio!" , (29, H - 50), screen, BLACK)
-
         elif not turno:
             if hp <=0:
+                pygame.mixer.music.stop()
+                pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
+                pygame.mixer.music.play()
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"Venceu! Seu pokemon" , (29, H - 50), screen, BLACK)
                 escreve(FONTE,"ganhou {0} de xp!".format(xp_ganho) , (29, H - 30), screen, BLACK)
@@ -965,8 +971,11 @@ def combate(screen,hp_atual, xp_atual):
             elif ataque < 5 and ataque > 0 and defesa == 0 and fuga == 0 and diff > 500:
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"Errou!" , (50, H - 50), screen, BLACK)
-            
-            elif fuga > 6 and defesa == 0 and ataque ==0:
+            elif defesa > 0 and ataque == 0 and fuga ==0 and diff > 500:
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                    escreve(FONTE,"Seu pokemon" , (50, H - 50), screen, BLACK)
+                    escreve(FONTE,"defendeu!" , (50, H - 20), screen, BLACK)    
+            elif fuga > 6 and defesa == 0 and ataque ==0 and diff >500:
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"Fuga bem sucedida!" , (29, H - 50), screen, BLACK)
             elif fuga <= 6 and fuga > 0  and defesa == 0 and ataque ==0 and diff > 500:
@@ -975,22 +984,17 @@ def combate(screen,hp_atual, xp_atual):
             if diff > 2000:
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"Vez do adversário!" , (30, H - 50), screen, BLACK)   
-                
-                
-          
                 if ataque_do_adversario >= 90 and defesa == 0 and diff > 3000:
                     desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                     escreve(FONTE,"Ataque crítico!" , (30, H - 50), screen, BLACK)
                 elif defesa > 0 and ataque == 0 and fuga ==0 and diff > 3000:
                     desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                     escreve(FONTE,"Seu pokemon" , (50, H - 50), screen, BLACK)
-                    escreve(FONTE,"defendeu!" , (50, H - 20), screen, BLACK)    
-                            
-                elif ataque_do_adversario >=5 and defesa ==0 and diff > 3000:
+                    escreve(FONTE,"defendeu!" , (50, H - 20), screen, BLACK)   
+                elif ataque_do_adversario >= 5 and defesa ==0 and diff > 3000:
                     desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
-                    escreve(FONTE,"Acertou!" , (50, H - 50), screen, BLACK)
-                    
-                elif ataque_do_adversario >0 and defesa ==0 and diff > 3000:
+                    escreve(FONTE,"Acertou!" , (50, H - 50), screen, BLACK)              
+                elif ataque_do_adversario > 0 and defesa ==0 and diff > 3000:
                     desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                     escreve(FONTE,"Errou!" , (50, H - 50), screen, BLACK)
                     

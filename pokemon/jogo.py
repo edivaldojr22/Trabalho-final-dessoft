@@ -4,7 +4,7 @@
 import pygame
 from os import path
 import random
-from combate import combate, pokemon_do_player
+from combate import combate
 
 # Estabelece a pasta que contem as figuras.
 img_dir = path.join(path.dirname(__file__), 'img')
@@ -20,8 +20,6 @@ pygame.mixer.music.play()
 # Dados gerais do jogo.
 W, H = 800, 447
 FPS = 60 # Frames por segundo
-
-screen = pygame.display.set_mode((W, H))
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
@@ -39,6 +37,7 @@ MOVING_DOWN = 4
 INIT = 42
 QUIT = 1337
 COMBATE = 5
+CAVERNA = 22
 
 class Player(pygame.sprite.Sprite):
     
@@ -88,6 +87,7 @@ def jogo(screen):
     background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
     background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_final.png')).convert()
     background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
+    
  
     background_x = -700
     background_y = -600
@@ -177,15 +177,10 @@ pygame.init()
 pygame.mixer.init()
 
 # Tamanho da tela.
-
+screen = pygame.display.set_mode((W, H))
 
 # Nome do jogo
-pygame.display.set_caption("Pokephyton")
-
-
-
-
-
+pygame.display.set_caption("Pokphyton")
 
 # Comando para evitar travamentos.
 try:
@@ -195,7 +190,8 @@ try:
             state = jogo(screen)
         elif state == COMBATE:
             state = combate(screen)
-            
+        elif state == CAVERNA:
+            state = caverna(screen)
         else:
             state = QUIT
 finally:
