@@ -956,6 +956,9 @@ def combate(screen,hp_atual, xp_atual):
                 escreve(FONTE,"Perdeu feio!" , (29, H - 50), screen, BLACK)
         elif not turno:
             if hp <=0:
+                pygame.mixer.music.stop()
+                pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
+                pygame.mixer.music.play()
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"Venceu! Seu pokemon" , (29, H - 50), screen, BLACK)
                 escreve(FONTE,"ganhou {0} de xp!".format(xp_ganho) , (29, H - 30), screen, BLACK)
