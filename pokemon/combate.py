@@ -769,6 +769,7 @@ def combate(screen,hp_atual, xp_atual):
     defesa = 0
     fuga = 0
     ataque_do_adversario = 0
+    now = pygame.time.get_ticks()
     while running:
         if MUSICA:
             pygame.mixer.music.set_volume(0.2)
@@ -800,10 +801,8 @@ def combate(screen,hp_atual, xp_atual):
                         if  fuga > 0 and fuga <=6:
                                 turno = False
                         elif fuga > 6 :
-                            pygame.mixer.music.stop()
-                            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-                            pygame.mixer.music.play()
-                            running = False
+                                
+                                turno = False
                     elif x > 404 and x < 576 and  y > 352 and y < 385  :
                         ataque = random.randint(1,101)
                         
@@ -817,33 +816,42 @@ def combate(screen,hp_atual, xp_atual):
                         turno= False
                     elif x > 606 and x < 780 and  y > 352 and y < 385:
                         defesa = 100
-                        
                         turno = False
            
 
         if not turno:
              now = pygame.time.get_ticks()
              diff= now - time
-             if diff> 3700:
+             
+             if diff> 1000:
+                 
+                 if fuga > 6:
+                     
+                     pygame.mixer.music.stop()
+                     pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
+                     pygame.mixer.music.play()
+                     running = False
                 
-                ataque_do_adversario = random.randint(1,100)
-                if ataque_do_adversario >= 90:
-                    
+             if diff> 3700:
+                 ataque_do_adversario = random.randint(1,100)
+                 
+                 if ataque_do_adversario >= 90:
                     dano = 22 + enemy.ataque - defesa
                     if dano < 0:
                         dano = 0
                     rayquaza.hp -= dano
-                elif ataque_do_adversario >=5:
-                    dano = enemy.ataque - defesa
-                    if dano < 0:
-                        dano = 0
-                    rayquaza.hp -= dano
+                 elif ataque_do_adversario >=5:
+                     dano = enemy.ataque - defesa
+                     if dano < 0:
+                         dano = 0
+                     rayquaza.hp -= dano
                     
-                else :
-                    dano = 0
-                    rayquaza.hp -= dano
+                 else :
+                     dano = 0
+                     rayquaza.hp -= dano
                    
-                turno = True
+                 turno = True
+                
                 
            
             
@@ -880,9 +888,6 @@ def combate(screen,hp_atual, xp_atual):
                 running = False 
                 xp_ganho = 0
                 xp_atual = 0
-                   
-            
-                
          
 
         bar = pygame.Surface((154*hp/maxhp, 9))
@@ -941,11 +946,8 @@ def combate(screen,hp_atual, xp_atual):
             escreve(FONTE,"fará?", (50, H - 20), screen, BLACK)
             
             
-            if fuga > 6 and defesa == 0 and ataque ==0:
-                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
-                escreve(FONTE,"Fuga bem sucedida!" , (29, H - 50), screen, BLACK)
                 
-            elif hp2 <=0:
+            if hp2 <=0:
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"Perdeu feio!" , (29, H - 50), screen, BLACK)
 
@@ -964,7 +966,9 @@ def combate(screen,hp_atual, xp_atual):
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"Errou!" , (50, H - 50), screen, BLACK)
             
-            
+            elif fuga > 6 and defesa == 0 and ataque ==0:
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                escreve(FONTE,"Fuga bem sucedida!" , (29, H - 50), screen, BLACK)
             elif fuga <= 6 and fuga > 0  and defesa == 0 and ataque ==0 and diff > 500:
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"A fuga falhou!" , (30, H - 50), screen, BLACK)

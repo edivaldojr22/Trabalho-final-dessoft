@@ -21,6 +21,8 @@ pygame.mixer.music.play()
 W, H = 800, 447
 FPS = 60 # Frames por segundo
 
+screen = pygame.display.set_mode((W, H))
+
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -155,7 +157,7 @@ def jogo(screen):
             chance = random.randint(0, 100)
             if chance < 2:
                 pygame.mixer.music.stop()
-                combate(screen,hp_atual, xp_atual)
+                combate(screen)
                 moving_state = MOVING_NONE 
 
                 
@@ -176,15 +178,14 @@ pygame.mixer.init()
 
 # Tamanho da tela.
 
-screen = pygame.display.set_mode((W, H))
 
 # Nome do jogo
 pygame.display.set_caption("Pokephyton")
 
-rayquaza = pokemon_do_player()
 
-hp_atual = rayquaza.hp
-xp_atual =rayquaza.xp
+
+
+
 
 # Comando para evitar travamentos.
 try:
@@ -193,7 +194,7 @@ try:
         if state == INIT:
             state = jogo(screen)
         elif state == COMBATE:
-            state = combate(screen,hp_atual, xp_atual)
+            state = combate(screen)
             
         else:
             state = QUIT
