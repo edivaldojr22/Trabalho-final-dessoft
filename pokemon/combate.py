@@ -921,19 +921,11 @@ def combate(screen,hp_atual, xp_atual):
             barra.fill(RED)
         screen.blit(barra, (630, 272))
         
-<<<<<<< HEAD
-        if enemy.hp <= 0 or rayquaza.hp <= 0:
-            pygame.mixer.music.stop()
-            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-            pygame.mixer.music.play()
-            running = False
-=======
         
         barraxp =  pygame.Surface((300*xp_atual/rayquaza.maxxp,4))
         barraxp.fill(BLUE)
         screen.blit(barraxp, (482, 315))
 
->>>>>>> 3a12617a59ae5e18603ec13181e482ca53d6b64f
         
         escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
         escreve(FONTE,'{0}'.format(rayquaza.level),(760, H - 184),screen, BLACK)
@@ -961,6 +953,9 @@ def combate(screen,hp_atual, xp_atual):
 
         elif not turno:
             if hp <=0:
+                pygame.mixer.music.stop()
+                pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
+                pygame.mixer.music.play()
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"Venceu! Seu pokemon" , (29, H - 50), screen, BLACK)
                 escreve(FONTE,"ganhou {0} de xp!".format(xp_ganho) , (29, H - 30), screen, BLACK)

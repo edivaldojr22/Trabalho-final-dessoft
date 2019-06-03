@@ -1,17 +1,13 @@
-# -*- coding: utf-8 -*-
-
-# Importando as bibliotecas necessárias.
 import pygame
 from os import path
 import random
 
-# Estabelece a pasta que contem as figuras.
-img_dir = path.join(path.dirname(__file__), 'img')
 music_dir = path.join(path.dirname(__file__), 'music')
-
-
 pygame.mixer.pre_init(44100, -16, 2, 2048)
-pygame.init()
+
+
+img_dir = path.join(path.dirname(__file__), 'img')
+fnt_dir = path.join(path.dirname(__file__), 'fonte')
 
 # Dados gerais do jogo.
 W, H = 800, 447
@@ -33,6 +29,8 @@ MOVING_DOWN = 4
 INIT = 42
 QUIT = 1337
 COMBATE = 5
+
+
 
 class Player(pygame.sprite.Sprite):
     
@@ -62,7 +60,7 @@ class Player(pygame.sprite.Sprite):
 
             self.image = self.images[self.state]
             self.images[MOVING_NONE] = self.image
-            self.image.set_colorkey(WHITE)
+            #self.image.set_colorkey(WHITE)
 
             self.mask = pygame.mask.from_threshold(self.image, (0, 0, 0, 255), (255,255,255,10))
 
@@ -72,37 +70,39 @@ class Player(pygame.sprite.Sprite):
             # Centraliza embaixo da tela.
             self.rect.centerx = W / 2
             self.rect.bottom = H / 2
-                   
 
-# Variável para o ajuste de velocidade
+
+
 def caverna(screen):
     clock = pygame.time.Clock()
-
+        
     # Carrega o fundo do jogo
+    background_caverna_macara = pygame.image.load(path.join(img_dir, 'caverna_mascara.png')).convert()
+    background_caverna_macara = pygame.transform.scale(background_caverna_macara,(320*5,400*5))
     background = pygame.image.load(path.join(img_dir, 'caverna.png')).convert()
-    background_mask_img = pygame.image.load(path.join(img_dir, 'caverna_mascara.png')).convert()
+    background = pygame.transform.scale(background,(320*5,400*5))
+    background_caverna_mask = pygame.mask.from_threshold(background_caverna_macara, (0, 0, 0), (20,20,20,255))
+    transicao = pygame.image.load(path.join(img_dir, 'transicao_preto.jpg')).convert()
+    
 
-
-    background_x = -700
-    background_y = -600
+    background_x = 20*5
+    background_y = -5*5
     background_x_prev = background_x
     background_y_prev = background_y
 
-    background_mask = pygame.mask.from_threshold(background_mask_img, (0, 0, 0), (20,20,20,255))
-
+    
     moving_state = MOVING_NONE
-
     player = Player()
 
     all_sprites = pygame.sprite.Group()
     all_sprites.add(player)
-    
-    # Loop principal.
+
+
     running = True
+
     while running:
-        
-        # Ajusta a velocidade do jogo.
         clock.tick(FPS) 
+        
 
         # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
@@ -123,7 +123,7 @@ def caverna(screen):
             elif event.type == pygame.KEYUP and event.key in [pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN]:
                 moving_state = MOVING_NONE
 
-        player.change_state(moving_state)
+        Player.change_state(player, moving_state)
 
         background_x_prev = background_x
         background_y_prev = background_y
@@ -142,9 +142,11 @@ def caverna(screen):
         if background_y < background.get_height() * -1: 
             background_y = background.get_height()
 
-        if background_mask.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
+        if background_caverna_mask.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
             background_x = background_x_prev
             background_y = background_y_prev
+
+
 
                 
 
@@ -155,21 +157,29 @@ def caverna(screen):
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
     
-    return(QUIT)
+    return 42
         
+    
 
-# Inicialização do Pygame.
-pygame.init()
-pygame.mixer.init()
 
-# Tamanho da tela.
-screen = pygame.display.set_mode((W, H))
 
-# Nome do jogo
-pygame.display.set_caption("Pokphyton")
 
-# Comando para evitar travamentos.
-try:
-    caverna(screen)
-finally:
-    pygame.quit()
+
+
+if __name__ == "__main__":
+    
+     #Inicialização do Pygame.
+    pygame.init()
+    pygame.mixer.init()
+    
+    # Tamanho da tela.
+    screen = pygame.display.set_mode((W, H))
+    
+    # Nome do jogo
+    pygame.display.set_caption("Pokemon")
+    
+    try:
+        caverna(screen)    
+    finally:
+        pygame.quit()
+    
