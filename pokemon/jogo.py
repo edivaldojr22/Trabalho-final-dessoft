@@ -4,7 +4,7 @@
 import pygame
 from os import path
 import random
-from combate import combate
+from combate import combate, pokemon_do_player
 
 # Estabelece a pasta que contem as figuras.
 img_dir = path.join(path.dirname(__file__), 'img')
@@ -20,6 +20,8 @@ pygame.mixer.music.play()
 # Dados gerais do jogo.
 W, H = 800, 447
 FPS = 60 # Frames por segundo
+
+screen = pygame.display.set_mode((W, H))
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
@@ -175,10 +177,15 @@ pygame.init()
 pygame.mixer.init()
 
 # Tamanho da tela.
-screen = pygame.display.set_mode((W, H))
+
 
 # Nome do jogo
-pygame.display.set_caption("Pokphyton")
+pygame.display.set_caption("Pokephyton")
+
+
+
+
+
 
 # Comando para evitar travamentos.
 try:
@@ -188,7 +195,7 @@ try:
             state = jogo(screen)
         elif state == COMBATE:
             state = combate(screen)
-            print(state)
+            
         else:
             state = QUIT
 finally:
