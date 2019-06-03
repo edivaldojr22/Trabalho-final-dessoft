@@ -37,6 +37,7 @@ MOVING_DOWN = 4
 INIT = 42
 QUIT = 1337
 COMBATE = 5
+CAVERNA = 22
 
 class Player(pygame.sprite.Sprite):
     
@@ -189,7 +190,8 @@ try:
             state = jogo(screen)
         elif state == COMBATE:
             state = combate(screen)
-            print(state)
+        elif state == CAVERNA:
+            state = caverna(screen)
         else:
             state = QUIT
 finally:
