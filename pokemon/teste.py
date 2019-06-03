@@ -4,7 +4,7 @@
 import pygame
 from os import path
 import random
-from combate import combate, pokemon_do_player
+from combate import *
 
 # Estabelece a pasta que contem as figuras.
 img_dir = path.join(path.dirname(__file__), 'img')
@@ -86,13 +86,10 @@ def jogo(screen):
     background = pygame.image.load(path.join(img_dir, 'mapa.jpeg')).convert()
     background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_final.png')).convert()
     background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
-<<<<<<< HEAD
-=======
 
->>>>>>> c3005484f6cac943445aee6d31669aa46e5df1bd
     #background_mask_entrada_caverna_1 = pygame.image.load(path.join(img_dir, 'caverna_entradas_mascara.png')).convert()
 
-    background_mask_entrada_caverna_1 = pygame.image.load(path.join(img_dir, 'caverna_entradas_mascara.jpeg')).convert()
+    #background_mask_entrada_caverna_1 = pygame.image.load(path.join(img_dir, 'caverna_entradas_mascara.jpeg')).convert()
 
     
     background_x = -700
@@ -104,11 +101,8 @@ def jogo(screen):
     matinho = pygame.mask.from_threshold(background_mask_mato, (0, 0, 0), (20,20,20,255))
 
     #caverna_entrada_1 = pygame.mask.from_threshold(background_mask_entrada_caverna, (0, 0, 0), (20,20,20,255))
-<<<<<<< HEAD
-=======
 
->>>>>>> c3005484f6cac943445aee6d31669aa46e5df1bd
-    caverna_entrada_1 = pygame.mask.from_threshold(background_mask_entrada_caverna_1, (0, 0, 0), (20,20,20,255))
+    #caverna_entrada_1 = pygame.mask.from_threshold(background_mask_entrada_caverna_1, (0, 0, 0), (20,20,20,255))
 
 
     moving_state = MOVING_NONE
@@ -171,13 +165,13 @@ def jogo(screen):
             chance = random.randint(0, 100)
             if chance < 2:
                 pygame.mixer.music.stop()
-                combate(screen,hp_player)
+                combate(screen,hp_atual,xp_atual)
                 moving_state = MOVING_NONE 
-        if caverna_entrada_1(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
-            pygame.mixer.music.stop()
-            pygame.mixer.music.set_volume(0.2)
-            pygame.mixer.music.load(path.join(music_dir, "musica_caverna.mp3"))
-            pygame.mixer.music.play()
+        #if caverna_entrada_1(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
+         #   pygame.mixer.music.stop()
+          #  pygame.mixer.music.set_volume(0.2)
+           # pygame.mixer.music.load(path.join(music_dir, "musica_caverna.mp3"))
+            #pygame.mixer.music.play()
             #caverna(screen)
                 
 
@@ -203,7 +197,7 @@ pygame.display.set_caption("Pokephyton")
 
 
 rayquaza = pokemon_do_player()
-hp_player = rayquaza.hp
+
 # Comando para evitar travamentos.
 try:
     state = INIT
@@ -211,7 +205,7 @@ try:
         if state == INIT:
             state = jogo(screen)
         elif state == COMBATE:
-            state = combate(screen,hp_player)
+            state = combate(screen,hp_atual,xp_atual)
             print(state)
         else:
             state = QUIT

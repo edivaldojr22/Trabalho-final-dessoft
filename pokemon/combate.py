@@ -49,6 +49,8 @@ class Blastoise(pygame.sprite.Sprite):
         
         self.maxhp = 196
         self.hp = self.maxhp
+        
+        self.ataque = 30
 
 class Charizard(pygame.sprite.Sprite):
     
@@ -71,6 +73,8 @@ class Charizard(pygame.sprite.Sprite):
         
         self.maxhp = 187
         self.hp = self.maxhp
+        
+        self.ataque = 33
 
 
 
@@ -95,6 +99,8 @@ class Mewtwo(pygame.sprite.Sprite):
         
         self.maxhp = 360
         self.hp = self.maxhp
+        self.ataque = 40
+        
 class Mew(pygame.sprite.Sprite):
     
     # Construtor da classe.
@@ -115,7 +121,9 @@ class Mew(pygame.sprite.Sprite):
         self.rect.bottom =  220
         
         self.maxhp = 330
-        self.hp = self.maxhp        
+        self.hp = self.maxhp 
+        
+        self.ataque = 36
 class Bulbasaur(pygame.sprite.Sprite):
     
     # Construtor da classe.
@@ -136,7 +144,9 @@ class Bulbasaur(pygame.sprite.Sprite):
         self.rect.bottom =  220
         
         self.maxhp = 97
-        self.hp = self.maxhp        
+        self.hp = self.maxhp 
+        
+        self.ataque = 22
 class Venosaur(pygame.sprite.Sprite):
     
     # Construtor da classe.
@@ -157,7 +167,9 @@ class Venosaur(pygame.sprite.Sprite):
         self.rect.bottom =  220
         
         self.maxhp = 201
-        self.hp = self.maxhp        
+        self.hp = self.maxhp  
+        
+        self.ataque = 30
 class Charmander(pygame.sprite.Sprite):
     
     # Construtor da classe.
@@ -179,6 +191,7 @@ class Charmander(pygame.sprite.Sprite):
         
         self.maxhp = 92
         self.hp = self.maxhp
+        self.ataque = 24
         
 class Squirtle(pygame.sprite.Sprite):
     
@@ -200,7 +213,8 @@ class Squirtle(pygame.sprite.Sprite):
         self.rect.bottom =  220
         
         self.maxhp = 87
-        self.hp = self.maxhp        
+        self.hp = self.maxhp
+        self.ataque = 22
         
 class Ratata(pygame.sprite.Sprite):
     
@@ -222,7 +236,9 @@ class Ratata(pygame.sprite.Sprite):
         self.rect.bottom =  220
         
         self.maxhp = 24
-        self.hp = self.maxhp        
+        self.hp = self.maxhp
+        self.ataque = 14
+        
         
 class Pikachu(pygame.sprite.Sprite):
     
@@ -244,7 +260,8 @@ class Pikachu(pygame.sprite.Sprite):
         self.rect.bottom =  220
         
         self.maxhp = 75
-        self.hp = self.maxhp       
+        self.hp = self.maxhp  
+        self.ataque = 19
 class Zubat(pygame.sprite.Sprite):
     
     # Construtor da classe.
@@ -265,7 +282,9 @@ class Zubat(pygame.sprite.Sprite):
         self.rect.bottom =  220
         
         self.maxhp = 51
-        self.hp = self.maxhp        
+        self.hp = self.maxhp
+        self.ataque = 15
+        
 class Diglet(pygame.sprite.Sprite):
     
     # Construtor da classe.
@@ -287,6 +306,7 @@ class Diglet(pygame.sprite.Sprite):
         
         self.maxhp = 36
         self.hp = self.maxhp
+        self.ataque = 15
 
 class Psyduck(pygame.sprite.Sprite):
     
@@ -309,6 +329,7 @@ class Psyduck(pygame.sprite.Sprite):
         
         self.maxhp = 52
         self.hp = self.maxhp
+        self.ataque = 17
 
 class Machamp(pygame.sprite.Sprite):
     
@@ -331,6 +352,7 @@ class Machamp(pygame.sprite.Sprite):
         
         self.maxhp = 92
         self.hp = self.maxhp
+        self.ataque = 32
 
 class Golem(pygame.sprite.Sprite):
     
@@ -353,6 +375,7 @@ class Golem(pygame.sprite.Sprite):
         
         self.maxhp = 124
         self.hp = self.maxhp
+        self.ataque = 31
 
 class Gengar(pygame.sprite.Sprite):
     
@@ -375,6 +398,7 @@ class Gengar(pygame.sprite.Sprite):
         
         self.maxhp = 145
         self.hp = self.maxhp
+        self.ataque = 32
 
 
 class Onix(pygame.sprite.Sprite):
@@ -398,6 +422,7 @@ class Onix(pygame.sprite.Sprite):
         
         self.maxhp = 162
         self.hp = self.maxhp
+        self.ataque = 33
 
 class Gyarados(pygame.sprite.Sprite):
     
@@ -420,6 +445,7 @@ class Gyarados(pygame.sprite.Sprite):
         
         self.maxhp = 167
         self.hp = self.maxhp
+        self.ataque = 33
 
 class Lapras(pygame.sprite.Sprite):
     
@@ -442,6 +468,7 @@ class Lapras(pygame.sprite.Sprite):
         
         self.maxhp = 202
         self.hp = self.maxhp
+        self.ataque = 35
 
 class Snorlax(pygame.sprite.Sprite):
     
@@ -464,6 +491,7 @@ class Snorlax(pygame.sprite.Sprite):
         
         self.maxhp = 252
         self.hp = self.maxhp
+        self.ataque = 35
 
 class Articuno(pygame.sprite.Sprite):
     
@@ -486,6 +514,7 @@ class Articuno(pygame.sprite.Sprite):
         
         self.maxhp = 302
         self.hp = self.maxhp
+        self.ataque = 38
 
 class Zapdos(pygame.sprite.Sprite):
     
@@ -508,6 +537,7 @@ class Zapdos(pygame.sprite.Sprite):
         
         self.maxhp = 306
         self.hp = self.maxhp
+        self.ataque = 38
 
 class Moltres(pygame.sprite.Sprite):
     
@@ -530,6 +560,7 @@ class Moltres(pygame.sprite.Sprite):
         
         self.maxhp = 301
         self.hp = self.maxhp
+        self.ataque = 38
 
 class Dragonite(pygame.sprite.Sprite):
     
@@ -552,6 +583,7 @@ class Dragonite(pygame.sprite.Sprite):
         
         self.maxhp = 276
         self.hp = self.maxhp
+        self.ataque = 37
 
         
 class pokemon_do_player(pygame.sprite.Sprite):
@@ -575,7 +607,10 @@ class pokemon_do_player(pygame.sprite.Sprite):
         self.maxhp = 276
         self.hp = self.maxhp
         self.xp = 0
+        self.maxxp = 600
         self.level = 50
+        self.maxlevel = 100
+        self.ataque = 30
 
 def escreve(fonte,msg, pos, screen, cor):
     text_surface = fonte.render(msg, True, cor)
@@ -631,13 +666,27 @@ def pokemon_inimigo(escolha):
     elif escolha == 22:
         escreve(fonte_pequena,'Moltres',(  0,H - 367), screen, BLACK)    
     elif escolha == 23:
-        escreve(fonte_pequena,'Dragonite',(  0,H - 367), screen, BLACK)    
+        escreve(fonte_pequena,'Dragonite',(  0,H - 367), screen, BLACK)  
+        
+def desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2):
+    screen.blit(background, (background_x, background_y))
+    all_sprites.draw(screen)
+    screen.blit(bar, (157, 88))
+    screen.blit(barra, (630, 272))
+    screen.blit(barraxp, (482, 315))
+    pokemon_inimigo(escolha)
+    escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
+    escreve(FONTE,'{0}'.format(rayquaza.level),(760, H - 184),screen, BLACK)
+    escreve(FONTE,'50',(292, H - 367),screen, BLACK)
+    escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
+        
             
+rayquaza = pokemon_do_player()
 
+hp_atual = rayquaza.hp
+xp_atual = rayquaza.xp
 
-
-
-def combate(screen):
+def combate(screen,hp_atual, xp_atual):
     #font = pygame.font.Font(path.join(fnt_dir, "PressStart2P.ttf"), 28)
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
@@ -739,65 +788,68 @@ def combate(screen):
                 y =  pygame.mouse.get_pos()[1]
                 if turno:
                     time = pygame.time.get_ticks()
+                    ataque = 0
                     defesa = 0
+                    fuga = 0
                     
-                    if x > 404 and x < 576 and  y > 352 and y < 385  :
-                        ataque = random.randint(1,101)
-                        
-                        if ataque >= 90:
-                            print('ataque crítico')
-                            enemy.hp -= 50
-                        elif ataque >= 5:
-                            enemy.hp -=20
-                        elif ataque > 0 :
-                            print('Errrrou')
-                          
-                        turno= False
-                    elif x > 606 and x < 780 and  y > 352 and y < 385:
-                        defesa = random.randint(1,101)
-                        
-                        turno = False
-                    elif x > 606 and x < 780 and y > 404 and y < 436:
+                    if x > 606 and x < 780 and y > 404 and y < 436:
+                        now = pygame.time.get_ticks()
+                        diff = now - time
                         fuga = random.randint(1,101)
-                        if fuga > 6:
-                            pygame.time.delay(1000)
+                        
+                        if  fuga > 0 and fuga <=6:
+                                turno = False
+                        elif fuga > 6 :
                             pygame.mixer.music.stop()
                             pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
                             pygame.mixer.music.play()
                             running = False
-                        else:
-                            
-                            turno = False
+                    elif x > 404 and x < 576 and  y > 352 and y < 385  :
+                        ataque = random.randint(1,101)
                         
+                        if ataque >= 90:
+                            enemy.hp -= 22* rayquaza.ataque
+                        elif ataque >= 5:
+                            enemy.hp -=rayquaza.ataque
+                        elif ataque > 0 :
+                            enemy.hp -= 0
+                          
+                        turno= False
+                    elif x > 606 and x < 780 and  y > 352 and y < 385:
+                        defesa = 100
+                        
+                        turno = False
            
 
         if not turno:
              now = pygame.time.get_ticks()
              diff= now - time
-             if diff> 2000:
-                print('Vez do adversário!')
+             if diff> 3700:
+                
                 ataque_do_adversario = random.randint(1,100)
                 if ataque_do_adversario >= 90:
-                    print('ataque crítico')
-                    dano = 50 - defesa
+                    
+                    dano = 22 + enemy.ataque - defesa
                     if dano < 0:
                         dano = 0
                     rayquaza.hp -= dano
                 elif ataque_do_adversario >=5:
-                    dano = 20 - defesa
+                    dano = enemy.ataque - defesa
                     if dano < 0:
                         dano = 0
                     rayquaza.hp -= dano
-                    print('acertou')
+                    
                 else :
-                    print('Errrrou')
+                    dano = 0
+                    rayquaza.hp -= dano
+                   
                 turno = True
                 
            
             
                     
         
-        
+        hp_atual = rayquaza.hp 
         
         
 
@@ -809,9 +861,28 @@ def combate(screen):
         hp= enemy.hp
         maxhp = enemy.maxhp
         
-        if enemy.hp < 0:
-            hp = 0    
-            running = False
+        now = pygame.time.get_ticks()
+        if enemy.hp <= 0:
+            hp = 0
+            now = pygame.time.get_ticks()
+            running = False 
+            if rayquaza.level < rayquaza.maxlevel:
+                xp_ganho = 300
+                rayquaza.xp += xp_ganho
+                xp_atual = rayquaza.xp
+                if xp_atual >= rayquaza.maxxp:
+                    xp_atual -= rayquaza.maxxp 
+                    rayquaza.level += 1
+                    rayquaza.maxhp += 8
+                    rayquaza.hp += 8
+                    rayquaza.ataque += 5
+            else:
+                running = False 
+                xp_ganho = 0
+                xp_atual = 0
+                   
+            
+                
          
 
         bar = pygame.Surface((154*hp/maxhp, 9))
@@ -826,12 +897,16 @@ def combate(screen):
         hp2 = rayquaza.hp
         maxhp2 = rayquaza.maxhp
         
+        now = pygame.time.get_ticks()
         if rayquaza.hp <= 0:
             hp2 = 0
-            xp_ganho = random.randint(20,40)
-            rayquaza.xp +=xp_ganho
-            running = False 
-        
+            
+            if diff > 4000:
+                pygame.mixer.music.stop()
+                pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
+                pygame.mixer.music.play()
+                running = False  
+            
         barra = pygame.Surface((152*hp2/maxhp2, 9))
         if hp2 > maxhp2/2:
             barra.fill(GREEN)
@@ -842,22 +917,14 @@ def combate(screen):
         screen.blit(barra, (630, 272))
         
         
-        barraxp =  pygame.Surface((rayquaza.xp,4))
+        barraxp =  pygame.Surface((300*xp_atual/rayquaza.maxxp,4))
         barraxp.fill(BLUE)
         screen.blit(barraxp, (482, 315))
-        
 
-        if enemy.hp <= 0 or rayquaza.hp <= 0:
-
-            pygame.mixer.music.stop()
-            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-            pygame.mixer.music.play()
-
-        
         
         escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-        escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-        escreve(FONTE,'50',(760, H - 184),screen, BLACK)
+        escreve(FONTE,'{0}'.format(rayquaza.level),(760, H - 184),screen, BLACK)
+        escreve(FONTE,'50',(292, H - 367),screen, BLACK)
         escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
         
         
@@ -867,161 +934,64 @@ def combate(screen):
         
         
             
-        if turno :
-            inicio = pygame.time.get_ticks()
-            agora = pygame.time.get_ticks()
-            screen.blit(background, (background_x, background_y))
-            all_sprites.draw(screen)
-            screen.blit(bar, (157, 88))
-            screen.blit(barra, (630, 272))
-            screen.blit(barraxp, (482, 315))
-            pokemon_inimigo(escolha)
-            escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-            escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-            escreve(FONTE,'50',(760, H - 184),screen, BLACK)
-            escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
+        if turno  :
+            now = pygame.time.get_ticks()
+            desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
             escreve(FONTE,"O que Dragonite" , (50, H - 50), screen, BLACK) 
             escreve(FONTE,"fará?", (50, H - 20), screen, BLACK)
-
             
             
-            
-            
-            if ataque >= 90 and defesa == 0 and fuga == 0:
-                screen.blit(background, (background_x, background_y))
-                all_sprites.draw(screen)
-                screen.blit(bar, (157, 88))
-                screen.blit(barra, (630, 272))
-                screen.blit(barraxp, (482, 315))
-                pokemon_inimigo(escolha)
-                escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-                escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-                escreve(FONTE,'50',(760, H - 184),screen, BLACK)
-                escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
-                escreve(FONTE,"Ataque crítico!" , (50, H - 50), screen, BLACK)
-            elif ataque >= 5  and defesa == 0 and fuga == 0:
-                screen.blit(background, (background_x, background_y))
-                all_sprites.draw(screen)
-                screen.blit(bar, (157, 88))
-                screen.blit(barra, (630, 272))
-                screen.blit(barraxp, (482, 315))
-                pokemon_inimigo(escolha)
-                escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-                escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-                escreve(FONTE,'50',(760, H - 184),screen, BLACK)
-                escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
-                escreve(FONTE,"Acertou!" , (50, H - 50), screen, BLACK)
-            elif ataque < 5 and ataque > 0 and defesa == 0 and fuga == 0:
-                screen.blit(background, (background_x, background_y))
-                all_sprites.draw(screen)
-                screen.blit(bar, (157, 88))
-                screen.blit(barra, (630, 272))
-                screen.blit(barraxp, (482, 315))
-                pokemon_inimigo(escolha)
-                escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-                escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-                escreve(FONTE,'50',(760, H - 184),screen, BLACK)
-                escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
-                escreve(FONTE,"Errou!" , (50, H - 50), screen, BLACK)
-            elif defesa > 0 and ataque == 0 and fuga ==0:
-                screen.blit(background, (background_x, background_y))
-                all_sprites.draw(screen)
-                screen.blit(bar, (157, 88))
-                screen.blit(barra, (630, 272))
-                screen.blit(barraxp, (482, 315))
-                pokemon_inimigo(escolha)
-                escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-                escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-                escreve(FONTE,'50',(760, H - 184),screen, BLACK)
-                escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
-                escreve(FONTE,"Seu pokemon" , (50, H - 50), screen, BLACK)
-                escreve(FONTE,"defendeu!" , (50, H - 20), screen, BLACK)
-            elif fuga > 6 and defesa == 0 and ataque ==0:
-                screen.blit(background, (background_x, background_y))
-                all_sprites.draw(screen)
-                screen.blit(bar, (157, 88))
-                screen.blit(barra, (630, 272))
-                screen.blit(barraxp, (482, 315))
-                pokemon_inimigo(escolha)
-                escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-                escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-                escreve(FONTE,'50',(760, H - 184),screen, BLACK)
-                escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
-                escreve(FONTE,"Fuga bem sucedida!" , (30, H - 50), screen, BLACK)
-            elif fuga > 0 and defesa == 0 and ataque ==0:
-                screen.blit(background, (background_x, background_y))
-                all_sprites.draw(screen)
-                screen.blit(bar, (157, 88))
-                screen.blit(barra, (630, 272))
-                screen.blit(barraxp, (482, 315))
-                pokemon_inimigo(escolha)
-                escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-                escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-                escreve(FONTE,'50',(760, H - 184),screen, BLACK)
-                escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
-                escreve(FONTE,"Se ferrou trouxa!" , (30, H - 50), screen, BLACK)
-              
-
-           
-                    
+            if fuga > 6 and defesa == 0 and ataque ==0:
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                escreve(FONTE,"Fuga bem sucedida!" , (29, H - 50), screen, BLACK)
+                
+            elif hp2 <=0:
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                escreve(FONTE,"Perdeu feio!" , (29, H - 50), screen, BLACK)
 
         elif not turno:
-            agora = pygame.time.get_ticks()
-            sub =  agora - inicio
-            if sub > 2000:
-                screen.blit(background, (background_x, background_y))
-                all_sprites.draw(screen)
-                screen.blit(bar, (157, 88))
-                screen.blit(barra, (630, 272))
-                screen.blit(barraxp, (482, 315))
-                pokemon_inimigo(escolha)
-                escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-                escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-                escreve(FONTE,'50',(760, H - 184),screen, BLACK)
-                escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)   
-                escreve(FONTE,"Vez do adversário!" , (30, H - 50), screen, BLACK)
+            if hp <=0:
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                escreve(FONTE,"Venceu! Seu pokemon" , (29, H - 50), screen, BLACK)
+                escreve(FONTE,"ganhou {0} de xp!".format(xp_ganho) , (29, H - 30), screen, BLACK)
+            elif ataque >= 90 and defesa == 0 and fuga == 0 and diff > 500:
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                escreve(FONTE,"Ataque crítico!" , (50, H - 50), screen, BLACK)
+            elif ataque >= 5  and defesa == 0 and fuga == 0 and diff > 500:
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                escreve(FONTE,"Acertou!" , (50, H - 50), screen, BLACK)
+            elif ataque < 5 and ataque > 0 and defesa == 0 and fuga == 0 and diff > 500:
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                escreve(FONTE,"Errou!" , (50, H - 50), screen, BLACK)
+            
+            
+            elif fuga <= 6 and fuga > 0  and defesa == 0 and ataque ==0 and diff > 500:
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                escreve(FONTE,"A fuga falhou!" , (30, H - 50), screen, BLACK)
+            if diff > 2000:
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                escreve(FONTE,"Vez do adversário!" , (30, H - 50), screen, BLACK)   
+                
+                
           
-            
-            
-            if sub > 3000:
-                if ataque_do_adversario >= 90:
-                    screen.blit(background, (background_x, background_y))
-                    all_sprites.draw(screen)
-                    screen.blit(bar, (157, 88))
-                    screen.blit(barra, (630, 272))
-                    screen.blit(barraxp, (482, 315))
-                    pokemon_inimigo(escolha)
-                    escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-                    escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-                    escreve(FONTE,'50',(760, H - 184),screen, BLACK)
-                    escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)   
+                if ataque_do_adversario >= 90 and defesa == 0 and diff > 3000:
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                     escreve(FONTE,"Ataque crítico!" , (30, H - 50), screen, BLACK)
-                        
-                elif ataque_do_adversario >=5:
-                    screen.blit(background, (background_x, background_y))
-                    all_sprites.draw(screen)
-                    screen.blit(bar, (157, 88))
-                    screen.blit(barra, (630, 272))
-                    screen.blit(barraxp, (482, 315))
-                    pokemon_inimigo(escolha)
-                    escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-                    escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-                    escreve(FONTE,'50',(760, H - 184),screen, BLACK)
-                    escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)   
+                elif defesa > 0 and ataque == 0 and fuga ==0 and diff > 3000:
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                    escreve(FONTE,"Seu pokemon" , (50, H - 50), screen, BLACK)
+                    escreve(FONTE,"defendeu!" , (50, H - 20), screen, BLACK)    
+                            
+                elif ataque_do_adversario >=5 and defesa ==0 and diff > 3000:
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                     escreve(FONTE,"Acertou!" , (50, H - 50), screen, BLACK)
-                        
-                elif ataque_do_adversario >0:
-                    screen.blit(background, (background_x, background_y))
-                    all_sprites.draw(screen)
-                    screen.blit(bar, (157, 88))
-                    screen.blit(barra, (630, 272))
-                    screen.blit(barraxp, (482, 315))
-                    pokemon_inimigo(escolha)
-                    escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-                    escreve(FONTE,'{0}'.format(rayquaza.level),(292, H - 367),screen, BLACK)
-                    escreve(FONTE,'50',(760, H - 184),screen, BLACK)
-                    escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)   
+                    
+                elif ataque_do_adversario >0 and defesa ==0 and diff > 3000:
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                     escreve(FONTE,"Errou!" , (50, H - 50), screen, BLACK)
+                    
+                    
+                    
 
                         
       
@@ -1032,7 +1002,8 @@ def combate(screen):
         # Depois de desenhar tudo, inverte o dispay.
         pygame.display.flip()
         
-    return 42
+   
+    return 42,hp_atual, xp_atual
 
 
 
@@ -1049,7 +1020,7 @@ if __name__ == "__main__":
     pygame.display.set_caption("Pokemon")
     
     try:
-        combate(screen)    
+        combate(screen,hp_atual,xp_atual)    
     finally:
         pygame.quit()
     
