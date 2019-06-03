@@ -570,7 +570,7 @@ class Dragonite(pygame.sprite.Sprite):
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
-        blastoise_img = pygame.image.load(path.join(img_dir, "149.png"))
+        blastoise_img = pygame.image.load(path.join(img_dir, "batata.png"))
         self.image = blastoise_img
         self.image.set_colorkey(WHITE)
         self.image = pygame.transform.scale(self.image,(120,140))
@@ -595,7 +595,7 @@ class pokemon_do_player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         rayquaza_img = pygame.image.load(path.join(img_dir, "149.png"))
         self.image = rayquaza_img
-        self.image.set_colorkey(GREEN)
+        self.image.set_colorkey(BLACK)
         self.image = pygame.transform.scale(self.image,(120,140))
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
@@ -808,7 +808,7 @@ def combate(screen,hp_atual, xp_atual):
                         ataque = random.randint(1,101)
                         
                         if ataque >= 90:
-                            enemy.hp -= 22* rayquaza.ataque
+                            enemy.hp -= 22 + rayquaza.ataque
                         elif ataque >= 5:
                             enemy.hp -=rayquaza.ataque
                         elif ataque > 0 :
@@ -852,8 +852,13 @@ def combate(screen,hp_atual, xp_atual):
                  elif ataque_do_adversario > 0:
                      dano = 0
                      rayquaza.hp -= dano
-                    
-                 turno = True
+                 
+                 if rayquaza.hp <= 0 and diff > 5500:
+                     
+                     running = False
+                 
+                 elif rayquaza.hp > 0:
+                     turno = True
                 
                 
            
@@ -872,30 +877,40 @@ def combate(screen,hp_atual, xp_atual):
         hp= enemy.hp
         maxhp = enemy.maxhp
         
-        now = pygame.time.get_ticks()
+        
         if enemy.hp <= 0:
             hp = 0
             now = pygame.time.get_ticks()
-            if diff > 0 and diff < 50:
-                if rayquaza.level < rayquaza.maxlevel:
-                        xp_ganho = 300
-                        rayquaza.xp += xp_ganho
-                        xp_atual = rayquaza.xp
-                        if xp_atual >= rayquaza.maxxp:
-                            xp_atual -= rayquaza.maxxp 
-                            rayquaza.level += 1
-                            rayquaza.maxhp += 8
-                            rayquaza.hp += 8
-                            rayquaza.ataque += 5
-                else:
-                        running = False 
-                        xp_ganho = 0
-                        xp_atual = 0
-            if diff > 3000:
+            
+            if rayquaza.level < rayquaza.maxlevel and diff >= 0 and diff < 50:
+                xp_ganho = random.randint(50,230)
+                rayquaza.xp += xp_ganho
+                xp_atual = rayquaza.xp
+                
+            if diff > 1900:
                 running = False 
+        
+
+        if xp_atual >= rayquaza.maxxp:
+            rayquaza.level += 1
+            rayquaza.maxhp += 8
+            rayquaza.hp += 8
+            rayquaza.ataque += 5
+            xp_atual -= rayquaza.maxxp 
+        else:
+            xp_ganho = 0
+            xp_atual = 0
+        
+        hp2 = rayquaza.hp
+        maxhp2 = rayquaza.maxhp
+        
+        if rayquaza.hp <= 0:
+            hp2 = 0
                 
-                
-         
+        if rayquaza.hp <= 0 or enemy.hp <= 0: 
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
+            pygame.mixer.music.play()
 
         bar = pygame.Surface((154*hp/maxhp, 9))
         if hp > maxhp/2:
@@ -906,18 +921,6 @@ def combate(screen,hp_atual, xp_atual):
             bar.fill(RED)
         screen.blit(bar, (157, 88))
         
-        hp2 = rayquaza.hp
-        maxhp2 = rayquaza.maxhp
-        
-        now = pygame.time.get_ticks()
-        if rayquaza.hp <= 0:
-            now = pygame.time.get_ticks()
-            if diff > 3000:
-                hp2 = 0
-                pygame.mixer.music.stop()
-                pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-                pygame.mixer.music.play()
-                running = False  
             
         barra = pygame.Surface((152*hp2/maxhp2, 9))
         if hp2 > maxhp2/2:
@@ -947,21 +950,23 @@ def combate(screen,hp_atual, xp_atual):
         
             
         if turno  :
+            
             now = pygame.time.get_ticks()
             desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
             escreve(FONTE,"O que Dragonite" , (50, H - 50), screen, BLACK) 
             escreve(FONTE,"fará?", (50, H - 20), screen, BLACK)
             if hp2 <=0:
-                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
-                escreve(FONTE,"Perdeu feio!" , (29, H - 50), screen, BLACK)
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                    escreve(FONTE,"Perdeu feio!" , (29, H - 50), screen, BLACK)  
+            
         elif not turno:
-            if hp <=0:
-                pygame.mixer.music.stop()
-                pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-                pygame.mixer.music.play()
+            if hp <=0 and diff >300:
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
-                escreve(FONTE,"Venceu! Seu pokemon" , (29, H - 50), screen, BLACK)
-                escreve(FONTE,"ganhou {0} de xp!".format(xp_ganho) , (29, H - 30), screen, BLACK)
+                escreve(FONTE,"Venceu! Ganhou" , (28, H - 50), screen, BLACK)
+                escreve(FONTE,"{0} de xp!".format(xp_ganho) , (28, H - 30), screen, BLACK) 
+            elif hp2 <=0:
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                    escreve(FONTE,"Perdeu feio!" , (29, H - 50), screen, BLACK)        
             elif ataque >= 90 and defesa == 0 and fuga == 0 and diff > 500:
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"Ataque crítico!" , (50, H - 50), screen, BLACK)
@@ -981,9 +986,15 @@ def combate(screen,hp_atual, xp_atual):
             elif fuga <= 6 and fuga > 0  and defesa == 0 and ataque ==0 and diff > 500:
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"A fuga falhou!" , (30, H - 50), screen, BLACK)
+            
+            
+                
+            
+            
             if diff > 2000:
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                 escreve(FONTE,"Vez do adversário!" , (30, H - 50), screen, BLACK)   
+                
                 if ataque_do_adversario >= 90 and defesa == 0 and diff > 3000:
                     desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
                     escreve(FONTE,"Ataque crítico!" , (30, H - 50), screen, BLACK)
