@@ -5,7 +5,6 @@ import pygame
 from os import path
 import random
 from combate import combate
-
 # Estabelece a pasta que contem as figuras.
 img_dir = path.join(path.dirname(__file__), 'img')
 music_dir = path.join(path.dirname(__file__), 'music')
@@ -13,7 +12,7 @@ music_dir = path.join(path.dirname(__file__), 'music')
 
 pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.init()
-pygame.mixer.music.set_volume(0.08)
+pygame.mixer.music.set_volume(0.2)
 pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
 pygame.mixer.music.play()
 
@@ -159,13 +158,13 @@ def jogo(screen):
                 pygame.mixer.music.stop()
                 combate(screen)
                 moving_state = MOVING_NONE 
-        if caverna_entrada_1(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
+
+        if caverna_entrada_1.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
             pygame.mixer.music.stop()
-            pygame.mixer.music.set_volume(0.2)
+            pygame.mixer.music.set_volume(0.5)
             pygame.mixer.music.load(path.join(music_dir, "musica_caverna.mp3"))
             pygame.mixer.music.play()
-            caverna(screen)
-                
+            
 
         # A cada loop, redesenha o fundo e os sprites
         screen.blit(background, (background_x, background_y))  # draws our first bg image
