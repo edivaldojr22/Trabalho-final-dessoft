@@ -607,19 +607,36 @@ class pokemon_do_player(pygame.sprite.Sprite):
         self.maxhp = 276
         self.hp = self.maxhp
         self.xp = 0
-        self.maxxp = 200
+        self.maxxp = 600
         self.level = 50
         self.maxlevel = 100
         self.ataque = 30
      
-    def update(self, hp2, level, xp_atual):
-        if self.maxhp != self.hp:
+        self.update()
+        
+    def update(self):
+        if hp2 != self.hp:
              self.hp = hp2
         if xp_atual != self.xp:
             self.xp = xp_atual
         if level != self.level:
             self.level = level
+            
+        if maxhp2 !=  self.maxhp:
+            self.maxhp = maxhp2
         
+        if maxxp != self.maxxp:
+            self.maxxp = maxxp
+            
+        if hit != self.ataque:
+            self.ataque = hit
+        
+level = 50
+hp2 = 276
+xp_atual = 0
+maxhp2 = 276
+maxxp = 600
+hit = 30
 
 def escreve(fonte,msg, pos, screen, cor):
     text_surface = fonte.render(msg, True, cor)
@@ -707,7 +724,15 @@ def combate(screen):
     background = pygame.transform.scale(background,(W,H))
     background_x = 0
     background_y = 0
-
+    
+    global hp2
+    global level
+    global xp_atual
+    global hit
+    global maxhp2
+    global maxxp
+    
+    
     escolha = random.randrange(24)
     if escolha == 0:
         enemy = Blastoise()
@@ -888,6 +913,8 @@ def combate(screen):
         maxhp = enemy.maxhp
         
         
+        
+        
         if enemy.hp <= 0:
             hp = 0
             now = pygame.time.get_ticks()
@@ -896,6 +923,9 @@ def combate(screen):
                 xp_ganho = random.randint(300, 452)
                 rayquaza.xp += xp_ganho
                 xp_atual = rayquaza.xp
+                hit = rayquaza.ataque
+                maxxp = rayquaza.maxxp
+                maxhp = rayquaza.maxhp
                 if xp_atual >= rayquaza.maxxp:
                     rayquaza.level += 1
                     rayquaza.maxhp += 8
@@ -904,6 +934,9 @@ def combate(screen):
                     rayquaza.maxxp += 200
                     rayquaza.xp = 0
                     xp_atual -= rayquaza.maxxp 
+                    hit = rayquaza.ataque
+                    maxxp = rayquaza.maxxp
+                    maxhp = rayquaza.maxhp
             elif rayquaza.level == rayquaza.maxlevel:
                 xp_ganho = 0
                 xp_atual = 0    
@@ -914,6 +947,7 @@ def combate(screen):
 
         
         xp_atual = rayquaza.xp
+        
         
         hp2 = rayquaza.hp
         maxhp2 = rayquaza.maxhp
@@ -950,6 +984,7 @@ def combate(screen):
         barraxp.fill(BLUE)
         screen.blit(barraxp, (482, 315))
 
+        
         level = rayquaza.level
         
         escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
@@ -1034,7 +1069,7 @@ def combate(screen):
         pygame.display.flip()
         
 
-    return 42, hp2, xp_atual,level
+    return 42
 
 
 
