@@ -1,6 +1,7 @@
 import pygame
 from os import path
 import random
+from combate import *
 
 music_dir = path.join(path.dirname(__file__), 'music')
 pygame.mixer.pre_init(44100, -16, 2, 2048)
@@ -106,7 +107,12 @@ def caverna(screen):
 
         # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
-            
+            chance = random.randint(0, 100)
+            if chance < 2:
+                    pygame.mixer.music.stop()
+                    combate(screen,hp_atual,xp_atual)
+                    moving_state = MOVING_NONE
+             
             # Verifica se foi fechado
             if event.type == pygame.QUIT:
                 running = False
@@ -146,8 +152,7 @@ def caverna(screen):
             background_x = background_x_prev
             background_y = background_y_prev
 
-
-
+        
                 
 
         # A cada loop, redesenha o fundo e os sprites

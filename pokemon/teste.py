@@ -83,8 +83,7 @@ class Player(pygame.sprite.Sprite):
 
 # Variável para o ajuste de velocidade
 
-hp_atual = rayquaza.hp
-xp_atual = rayquaza.xp            
+            
             
 def jogo(screen):
     clock = pygame.time.Clock()

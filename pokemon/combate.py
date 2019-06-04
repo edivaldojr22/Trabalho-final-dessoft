@@ -607,7 +607,7 @@ class pokemon_do_player(pygame.sprite.Sprite):
         self.maxhp = 276
         self.hp = self.maxhp
         self.xp = 0
-        self.maxxp = 600
+        self.maxxp = 200
         self.level = 50
         self.maxlevel = 100
         self.ataque = 30
@@ -680,6 +680,7 @@ def desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,b
     escreve(FONTE,'{0}'.format(level),(760, H - 184),screen, BLACK)
     escreve(FONTE,'50',(292, H - 367),screen, BLACK)
     escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
+
 
         
             
@@ -967,7 +968,6 @@ def combate(screen,hp_atual, xp_atual):
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                 escreve(FONTE,"Venceu! Ganhou" , (28, H - 50), screen, BLACK)
                 escreve(FONTE,"{0} de xp!".format(xp_ganho) , (28, H - 30), screen, BLACK) 
-               
             elif ataque >= 90 and defesa == 0 and fuga == 0 and diff > 500:
                 desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                 escreve(FONTE,"Ataque crítico!" , (50, H - 50), screen, BLACK)
