@@ -82,6 +82,10 @@ class Player(pygame.sprite.Sprite):
                    
 
 # Variável para o ajuste de velocidade
+
+hp_atual = rayquaza.hp
+xp_atual = rayquaza.xp            
+            
 def jogo(screen):
     clock = pygame.time.Clock()
 
@@ -162,6 +166,8 @@ def jogo(screen):
             background_x = background_x_prev
             background_y = background_y_prev
 
+        hp_atual = rayquaza.hp
+        xp_atual = rayquaza.xp  
         if matinho.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)) and moving_state != MOVING_NONE:
             chance = random.randint(0, 100)
             if chance < 2:
@@ -175,7 +181,7 @@ def jogo(screen):
             pygame.mixer.music.play()
             caverna(screen)
                 
-
+  
         # A cada loop, redesenha o fundo e os sprites
         screen.blit(background, (background_x, background_y))  # draws our first bg image
         all_sprites.draw(screen)

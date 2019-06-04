@@ -905,7 +905,7 @@ def combate(screen,hp_atual, xp_atual):
         
         
         
-        hp2 = rayquaza.hp
+        hp2 = hp_atual
         maxhp2 = rayquaza.maxhp
         
         if hp_atual <= 0:
