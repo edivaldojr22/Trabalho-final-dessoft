@@ -669,7 +669,7 @@ def pokemon_inimigo(escolha,screen):
     elif escolha == 23:
         escreve(fonte_pequena,'Dragonite',(  0,H - 367), screen, BLACK)  
         
-def desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2):
+def desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2,level):
     screen.blit(background, (background_x, background_y))
     all_sprites.draw(screen)
     screen.blit(bar, (157, 88))
@@ -677,9 +677,10 @@ def desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,b
     screen.blit(barraxp, (482, 315))
     pokemon_inimigo(escolha,screen)
     escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-    escreve(FONTE,'{0}'.format(rayquaza.level),(760, H - 184),screen, BLACK)
+    escreve(FONTE,'{0}'.format(level),(760, H - 184),screen, BLACK)
     escreve(FONTE,'50',(292, H - 367),screen, BLACK)
     escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
+
         
             
 rayquaza = pokemon_do_player()
@@ -882,24 +883,27 @@ def combate(screen,hp_atual, xp_atual):
             hp = 0
             now = pygame.time.get_ticks()
             
-            if rayquaza.level < rayquaza.maxlevel and diff >= 0 and diff < 50:
-                xp_ganho = random.randint(50,230)
+            if rayquaza.level < rayquaza.maxlevel and diff  < 15:
+                xp_ganho = random.randint(300, 452)
                 rayquaza.xp += xp_ganho
                 xp_atual = rayquaza.xp
+                if xp_atual >= rayquaza.maxxp:
+                    rayquaza.level += 1
+                    rayquaza.maxhp += 200
+                    rayquaza.hp += 8
+                    rayquaza.ataque += 5
+                    rayquaza.xp = 0
+                    xp_atual -= rayquaza.maxxp 
+            elif rayquaza.level == rayquaza.maxlevel:
+                xp_ganho = 0
+                xp_atual = 0    
                 
             if diff > 1900:
                 running = False 
         
 
-        if xp_atual >= rayquaza.maxxp:
-            rayquaza.level += 1
-            rayquaza.maxhp += 8
-            rayquaza.hp += 8
-            rayquaza.ataque += 5
-            xp_atual -= rayquaza.maxxp 
-        else:
-            xp_ganho = 0
-            xp_atual = 0
+        
+        
         
         hp2 = rayquaza.hp
         maxhp2 = rayquaza.maxhp
@@ -936,9 +940,10 @@ def combate(screen,hp_atual, xp_atual):
         barraxp.fill(BLUE)
         screen.blit(barraxp, (482, 315))
 
+        level = rayquaza.level
         
         escreve(fonte_pequena,'Dragonite',(  475,H - 186), screen, BLACK)
-        escreve(FONTE,'{0}'.format(rayquaza.level),(760, H - 184),screen, BLACK)
+        escreve(FONTE,'{0}'.format(level),(760, H - 184),screen, BLACK)
         escreve(FONTE,'50',(292, H - 367),screen, BLACK)
         escreve(FONTE,'{0}/{1}'.format(hp2,maxhp2),(650, H - 137), screen , BLACK)
         
@@ -948,43 +953,39 @@ def combate(screen,hp_atual, xp_atual):
         
         
         
-            
+                 
         if turno  :
             
             now = pygame.time.get_ticks()
-            desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+            desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
             escreve(FONTE,"O que Dragonite" , (50, H - 50), screen, BLACK) 
             escreve(FONTE,"fará?", (50, H - 20), screen, BLACK)
-            if hp2 <=0:
-                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
-                    escreve(FONTE,"Perdeu feio!" , (29, H - 50), screen, BLACK)  
+              
             
         elif not turno:
             if hp <=0 and diff >300:
-                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                 escreve(FONTE,"Venceu! Ganhou" , (28, H - 50), screen, BLACK)
                 escreve(FONTE,"{0} de xp!".format(xp_ganho) , (28, H - 30), screen, BLACK) 
-            elif hp2 <=0:
-                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
-                    escreve(FONTE,"Perdeu feio!" , (29, H - 50), screen, BLACK)        
+               
             elif ataque >= 90 and defesa == 0 and fuga == 0 and diff > 500:
-                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                 escreve(FONTE,"Ataque crítico!" , (50, H - 50), screen, BLACK)
             elif ataque >= 5  and defesa == 0 and fuga == 0 and diff > 500:
-                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                 escreve(FONTE,"Acertou!" , (50, H - 50), screen, BLACK)
             elif ataque < 5 and ataque > 0 and defesa == 0 and fuga == 0 and diff > 500:
-                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                 escreve(FONTE,"Errou!" , (50, H - 50), screen, BLACK)
             elif defesa > 0 and ataque == 0 and fuga ==0 and diff > 500:
-                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
-                    escreve(FONTE,"Seu pokemon" , (50, H - 50), screen, BLACK)
-                    escreve(FONTE,"defendeu!" , (50, H - 20), screen, BLACK)    
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
+                escreve(FONTE,"Seu pokemon" , (50, H - 50), screen, BLACK)
+                escreve(FONTE,"defendeu!" , (50, H - 20), screen, BLACK)    
             elif fuga > 6 and defesa == 0 and ataque ==0 and diff >500:
-                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                 escreve(FONTE,"Fuga bem sucedida!" , (29, H - 50), screen, BLACK)
             elif fuga <= 6 and fuga > 0  and defesa == 0 and ataque ==0 and diff > 500:
-                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                 escreve(FONTE,"A fuga falhou!" , (30, H - 50), screen, BLACK)
             
             
@@ -992,23 +993,25 @@ def combate(screen,hp_atual, xp_atual):
             
             
             if diff > 2000:
-                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                 escreve(FONTE,"Vez do adversário!" , (30, H - 50), screen, BLACK)   
                 
                 if ataque_do_adversario >= 90 and defesa == 0 and diff > 3000:
-                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                     escreve(FONTE,"Ataque crítico!" , (30, H - 50), screen, BLACK)
                 elif defesa > 0 and ataque == 0 and fuga ==0 and diff > 3000:
-                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                     escreve(FONTE,"Seu pokemon" , (50, H - 50), screen, BLACK)
                     escreve(FONTE,"defendeu!" , (50, H - 20), screen, BLACK)   
                 elif ataque_do_adversario >= 5 and defesa ==0 and diff > 3000:
-                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2,level)
                     escreve(FONTE,"Acertou!" , (50, H - 50), screen, BLACK)              
                 elif ataque_do_adversario > 0 and defesa ==0 and diff > 3000:
-                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2)
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
                     escreve(FONTE,"Errou!" , (50, H - 50), screen, BLACK)
-                    
+                if hp2 <=0 and diff > 3800:
+                    desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,barra,barraxp,escolha,hp2,maxhp2, level)
+                    escreve(FONTE,"Perdeu feio!" , (29, H - 50), screen, BLACK)     
                     
                     
 

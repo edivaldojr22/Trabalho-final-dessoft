@@ -7,6 +7,7 @@ import random
 from caverna import *
 from combate import *
 
+
 # Estabelece a pasta que contem as figuras.
 img_dir = path.join(path.dirname(__file__), 'img')
 music_dir = path.join(path.dirname(__file__), 'music')
@@ -35,7 +36,8 @@ MOVING_LEFT = 1
 MOVING_RIGHT = 2
 MOVING_UP = 3
 MOVING_DOWN = 4
-INIT = 42
+INIT = 1
+JOGO = 42
 QUIT = 1337
 COMBATE = 5
 
@@ -88,7 +90,7 @@ def jogo(screen):
     background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_final.png')).convert()
     background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
     background_mask_entrada_caverna_1 = pygame.image.load(path.join(img_dir, 'caverna_entradas_mascara.jpeg')).convert()
-    #background_mask_entrada_caverna_1 = pygame.image.load(path.join(img_dir, 'caverna_entradas_mascara.jpeg')).convert()
+    
 
     
     background_x = -700
@@ -101,7 +103,7 @@ def jogo(screen):
 
     caverna_entrada_1 = pygame.mask.from_threshold(background_mask_entrada_caverna_1, (0, 0, 0), (20,20,20,255))
 
-    #caverna_entrada_1 = pygame.mask.from_threshold(background_mask_entrada_caverna_1, (0, 0, 0), (20,20,20,255))
+    
 
 
     moving_state = MOVING_NONE
@@ -182,6 +184,40 @@ def jogo(screen):
         pygame.display.flip()
     
     return(QUIT)
+
+def init_screen(screen):
+    # Variável para o ajuste de velocidade
+    clock = pygame.time.Clock()
+
+    # Carrega o fundo da tela inicial
+    background = pygame.image.load(path.join(img_dir, 'tela inicio.jpg')).convert()
+    background_rect = background.get_rect()
+
+    running = True
+    while running:
+        
+        # Ajusta a velocidade do jogo.
+        clock.tick(FPS)
+        
+        # Processa os eventos (mouse, teclado, botão, etc).
+        for event in pygame.event.get():
+            # Verifica se foi fechado.
+            if event.type == pygame.QUIT:
+                state = QUIT
+                running = False
+
+            if event.type == pygame.KEYUP:
+                state = JOGO
+                running = False
+                    
+        # A cada loop, redesenha o fundo e os sprites
+        screen.fill(BLACK)
+        screen.blit(background, background_rect)
+
+        # Depois de desenhar tudo, inverte o display.
+        pygame.display.flip()
+
+    return 42
         
 
 # Inicialização do Pygame.
@@ -202,10 +238,12 @@ try:
     state = INIT
     while state != QUIT:
         if state == INIT:
+            state = init_screen(screen)
+        elif state == JOGO:
             state = jogo(screen)
         elif state == COMBATE:
             state = combate(screen,hp_atual,xp_atual)
-            print(state)
+            
         else:
             state = QUIT
 finally:
