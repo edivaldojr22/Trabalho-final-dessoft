@@ -15,9 +15,7 @@ music_dir = path.join(path.dirname(__file__), 'music')
 
 pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.init()
-pygame.mixer.music.set_volume(0.2)
-pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
-pygame.mixer.music.play()
+
 
 # Dados gerais do jogo.
 W, H = 800, 447
@@ -86,6 +84,12 @@ class Player(pygame.sprite.Sprite):
             
             
 def jogo(screen):
+
+    pygame.time.delay(1000)
+    pygame.mixer.music.set_volume(0.2)
+    pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
+    pygame.mixer.music.play()
+
     clock = pygame.time.Clock()
 
     # Carrega o fundo do jogo
@@ -93,7 +97,8 @@ def jogo(screen):
     background_mask_img = pygame.image.load(path.join(img_dir, 'mascara_final.png')).convert()
     background_mask_mato = pygame.image.load(path.join(img_dir, 'mascara_mato.png')).convert()
     background_mask_entrada_caverna_1 = pygame.image.load(path.join(img_dir, 'caverna_entradas_mascara.jpeg')).convert()
-    
+    background_mask_entrada_caverna_2 = pygame.image.load(path.join(img_dir, 'carverna_entrada_2.jpeg')).convert()
+
 
     
     background_x = -700
@@ -105,6 +110,7 @@ def jogo(screen):
     matinho = pygame.mask.from_threshold(background_mask_mato, (0, 0, 0), (20,20,20,255))
 
     caverna_entrada_1 = pygame.mask.from_threshold(background_mask_entrada_caverna_1, (0, 0, 0), (20,20,20,255))
+    caverna_entrada_2 = pygame.mask.from_threshold(background_mask_entrada_caverna_2, (0, 0, 0), (20,20,20,255))
 
     
 
@@ -173,12 +179,11 @@ def jogo(screen):
                 combate(screen)
                 moving_state = MOVING_NONE 
         if caverna_entrada_1.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
-            pygame.mixer.music.stop()
-            pygame.mixer.music.set_volume(0.5)
-            pygame.mixer.music.load(path.join(music_dir, "musica_caverna.mp3"))
-            pygame.mixer.music.play()
-            caverna(screen)
-                
+            background_x = -1250
+            background_y = -850
+        if caverna_entrada_2.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
+            background_x = -2100
+            background_y = -280
   
         # A cada loop, redesenha o fundo e os sprites
         screen.blit(background, (background_x, background_y))  # draws our first bg image
@@ -192,6 +197,12 @@ def jogo(screen):
 def init_screen(screen):
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
+
+    pygame.init()
+    pygame.mixer.music.set_volume(0.2)
+    pygame.mixer.music.load(path.join(music_dir, "Title Screen.mp3"))
+    pygame.mixer.music.play()
+
 
     # Carrega o fundo da tela inicial
     background = pygame.image.load(path.join(img_dir, 'tela inicio.jpg')).convert()
@@ -214,6 +225,7 @@ def init_screen(screen):
 
             if event.type == pygame.KEYUP:
                 state = JOGO
+                pygame.mixer.music.stop()
                 running = False
                     
         # A cada loop, redesenha o fundo e os sprites
