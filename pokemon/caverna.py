@@ -110,7 +110,7 @@ def caverna(screen):
             chance = random.randint(0, 100)
             if chance < 2:
                     pygame.mixer.music.stop()
-                    combate(screen,hp_atual,xp_atual)
+                    combate(screen)
                     moving_state = MOVING_NONE
              
             # Verifica se foi fechado
