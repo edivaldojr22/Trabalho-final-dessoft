@@ -611,6 +611,15 @@ class pokemon_do_player(pygame.sprite.Sprite):
         self.level = 50
         self.maxlevel = 100
         self.ataque = 30
+     
+    def update(self, hp2, level, xp_atual):
+        if self.maxhp != self.hp:
+             self.hp = hp2
+        if xp_atual != self.xp:
+            self.xp = xp_atual
+        if level != self.level:
+            self.level = level
+        
 
 def escreve(fonte,msg, pos, screen, cor):
     text_surface = fonte.render(msg, True, cor)
@@ -684,12 +693,11 @@ def desenha_tudo(screen,background, background_x, background_y,all_sprites,bar,b
 
         
             
-rayquaza = pokemon_do_player()
 
-hp_atual = rayquaza.hp
-xp_atual = rayquaza.xp
 
-def combate(screen,hp_atual, xp_atual):
+
+
+def combate(screen):
     #font = pygame.font.Font(path.join(fnt_dir, "PressStart2P.ttf"), 28)
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
@@ -842,24 +850,24 @@ def combate(screen,hp_atual, xp_atual):
                     dano = 22 + enemy.ataque - defesa
                     if dano < 0:
                         dano = 0
-                    hp_atual -= dano
+                    rayquaza.hp -= dano
                    
                  elif ataque_do_adversario >=5:
                      dano = enemy.ataque - defesa
                      if dano < 0:
                          dano = 0
-                     hp_atual -= dano
+                     rayquaza.hp -= dano
                      
                     
                  elif ataque_do_adversario > 0:
                      dano = 0
-                     hp_atual -= dano
+                     rayquaza.hp -= dano
                  
-                 if hp_atual <= 0 and diff > 5500:
+                 if rayquaza.hp <= 0 and diff > 5500:
                      
                      running = False
                  
-                 elif hp_atual > 0:
+                 elif rayquaza.hp > 0:
                      turno = True
                 
                 
@@ -890,9 +898,10 @@ def combate(screen,hp_atual, xp_atual):
                 xp_atual = rayquaza.xp
                 if xp_atual >= rayquaza.maxxp:
                     rayquaza.level += 1
-                    rayquaza.maxhp += 200
+                    rayquaza.maxhp += 8
                     rayquaza.hp += 8
                     rayquaza.ataque += 5
+                    rayquaza.maxxp += 200
                     rayquaza.xp = 0
                     xp_atual -= rayquaza.maxxp 
             elif rayquaza.level == rayquaza.maxlevel:
@@ -904,15 +913,15 @@ def combate(screen,hp_atual, xp_atual):
         
 
         
+        xp_atual = rayquaza.xp
         
-        
-        hp2 = hp_atual
+        hp2 = rayquaza.hp
         maxhp2 = rayquaza.maxhp
         
-        if hp_atual <= 0:
+        if rayquaza.hp <= 0:
             hp2 = 0
                 
-        if hp_atual <= 0 or enemy.hp <= 0: 
+        if rayquaza.hp <= 0 or enemy.hp <= 0: 
             pygame.mixer.music.stop()
             pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
             pygame.mixer.music.play()
@@ -1024,8 +1033,8 @@ def combate(screen,hp_atual, xp_atual):
         # Depois de desenhar tudo, inverte o dispay.
         pygame.display.flip()
         
-   
-    return 42, hp_atual,xp_atual
+
+    return 42, hp2, xp_atual,level
 
 
 
@@ -1042,7 +1051,7 @@ if __name__ == "__main__":
     pygame.display.set_caption("Pokemon")
     
     try:
-        combate(screen,hp_atual,xp_atual)    
+        combate(screen)    
     finally:
         pygame.quit()
     

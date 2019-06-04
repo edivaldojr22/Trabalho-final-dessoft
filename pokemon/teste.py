@@ -165,13 +165,12 @@ def jogo(screen):
             background_x = background_x_prev
             background_y = background_y_prev
 
-        hp_atual = rayquaza.hp
-        xp_atual = rayquaza.xp  
+         
         if matinho.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)) and moving_state != MOVING_NONE:
             chance = random.randint(0, 100)
             if chance < 2:
                 pygame.mixer.music.stop()
-                combate(screen,hp_atual,xp_atual)
+                combate(screen)
                 moving_state = MOVING_NONE 
         if caverna_entrada_1.overlap(player.mask, (player.rect.x - background_x, player.rect.y - background_y)):
             pygame.mixer.music.stop()
@@ -238,7 +237,6 @@ screen = pygame.display.set_mode((W, H))
 pygame.display.set_caption("Pokephyton")
 
 
-rayquaza = pokemon_do_player()
 
 # Comando para evitar travamentos.
 try:
@@ -249,7 +247,7 @@ try:
         elif state == JOGO:
             state = jogo(screen)
         elif state == COMBATE:
-            state = combate(screen,hp_atual,xp_atual)
+            state = combate(screen)
             
         else:
             state = QUIT
