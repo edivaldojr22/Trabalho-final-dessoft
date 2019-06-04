@@ -841,24 +841,24 @@ def combate(screen,hp_atual, xp_atual):
                     dano = 22 + enemy.ataque - defesa
                     if dano < 0:
                         dano = 0
-                    rayquaza.hp -= dano
+                    hp_atual -= dano
                    
                  elif ataque_do_adversario >=5:
                      dano = enemy.ataque - defesa
                      if dano < 0:
                          dano = 0
-                     rayquaza.hp -= dano
+                     hp_atual -= dano
                      
                     
                  elif ataque_do_adversario > 0:
                      dano = 0
-                     rayquaza.hp -= dano
+                     hp_atual -= dano
                  
-                 if rayquaza.hp <= 0 and diff > 5500:
+                 if hp_atual <= 0 and diff > 5500:
                      
                      running = False
                  
-                 elif rayquaza.hp > 0:
+                 elif hp_atual > 0:
                      turno = True
                 
                 
@@ -866,7 +866,7 @@ def combate(screen,hp_atual, xp_atual):
             
                     
         
-        hp_atual = rayquaza.hp 
+        
         
         
 
@@ -908,10 +908,10 @@ def combate(screen,hp_atual, xp_atual):
         hp2 = rayquaza.hp
         maxhp2 = rayquaza.maxhp
         
-        if rayquaza.hp <= 0:
+        if hp_atual <= 0:
             hp2 = 0
                 
-        if rayquaza.hp <= 0 or enemy.hp <= 0: 
+        if hp_atual <= 0 or enemy.hp <= 0: 
             pygame.mixer.music.stop()
             pygame.mixer.music.load(path.join(music_dir, "route 209.mp3"))
             pygame.mixer.music.play()
@@ -1025,7 +1025,7 @@ def combate(screen,hp_atual, xp_atual):
         pygame.display.flip()
         
    
-    return 42,hp_atual, xp_atual
+    return 42, hp_atual,xp_atual
 
 
 
